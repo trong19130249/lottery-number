@@ -99,7 +99,12 @@ function refreshData() {
 refreshData();
 // lấy index giai thưởng chưa quay
 function getIndexNotSpin() {
-    for (var i = 0; i < giaThuong.length; i++) {
+    // for (var i = 0; i < giaThuong.length; i++) {
+    //     if (giaThuong[i].giaithuong == "") {
+    //         return i;
+    //     }
+    // }
+    for (var i = giaThuong.length - 1; i >= 0; i--) {
         if (giaThuong[i].giaithuong == "") {
             return i;
         }
@@ -360,6 +365,7 @@ function getRandomUniqueNumber(array) {
  *
  */
 var curPage = "";
+var boxTableDocument = document.querySelector("#boxTable");
 function goPage(page) {
     curPage = page;
 
@@ -368,6 +374,8 @@ function goPage(page) {
     resultContainer.visible = false;
 
     var targetContainer = null;
+    // add class zindex-top boxTableDocument
+    boxTableDocument.classList.add("zindex-top");
     switch (page) {
         case "main":
             targetContainer = mainContainer;
@@ -379,6 +387,8 @@ function goPage(page) {
             break;
 
         case "result":
+            //remove class zindex-top boxTableDocument
+            boxTableDocument.classList.remove("zindex-top");
             targetContainer = resultContainer;
             stopGame();
             // if (gameData.matchNum != -1) {

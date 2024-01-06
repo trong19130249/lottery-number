@@ -30,9 +30,15 @@
           text-align: center;
         }
         th{
-            font-size: 25px;
+            font-size: 22px;
           font-weight: 600;
         }
+        th {
+         top: 0;
+         position: sticky;
+         background: #ffbe0b;
+         color: #fff;
+      }
         td{
             font-size: 18px;
           font-weight: 600;
@@ -134,16 +140,19 @@
           "
         >
         <div style="flex: 1;"></div>
-       <div style="flex: 1; color: #fff; margin-top: 100px; margin-left: 200px;">
-        <table  id="tableResult">
-            <tr>
-              <td  style="width: 20px;">STT</td>
-              <td  style="width: 200px;">Giải</td>
-              <td style="width: 100px;">Kết quả</td>
-            </tr>
+    <div style="flex: 1; color: #fff; margin-top: 70px; margin-left: 150px; overflow: auto; "  id="boxTable" class="zindex-top">
+        <table id="tableResult">
+             <thead>
+                <tr>
+                <th style="width: 20px;">STT</th>
+                <th style="width: 200px;">Giải</th>
+                <th style="width: 100px;">Kết quả</th>
+                </tr>
+            </thead>
 
-          </table>
-       </div>
+            <!-- Add your table rows here -->
+        </table>
+    </div>
 
     </div>
       </div>
