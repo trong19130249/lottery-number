@@ -22,7 +22,7 @@ function initMain() {
   initPhysics();
 
   readyGame();
-  goPage("game");
+  goPage("main");
 
   resizeCanvas();
 }

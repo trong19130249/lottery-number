@@ -406,10 +406,12 @@ function goPage(page) {
     boxTableDocument.classList.add("zindex-top");
     switch (page) {
         case "main":
+            removeZindex();
             targetContainer = mainContainer;
             break;
 
         case "game":
+            addZindex()
             targetContainer = gameContainer;
             startGame();
             break;
