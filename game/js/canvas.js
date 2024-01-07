@@ -384,7 +384,7 @@ function buildGameCanvas() {
     buttonCancel.y = (canvasH / 100) * 67;
 
     confirmMessageTxt = new createjs.Text();
-    confirmMessageTxt.font = "40px quantifybold";
+    confirmMessageTxt.font = "bold 40px roboto";
     confirmMessageTxt.color = "#ddb867";
     confirmMessageTxt.textAlign = "center";
     confirmMessageTxt.textBaseline = "alphabetic";
@@ -479,34 +479,34 @@ function buildGameCanvas() {
  *
  */
 function resizeCanvas() {
-  if (canvasContainer != undefined) {
-    buttonSettings.x = canvasW - offset.x - 60;
-    buttonSettings.y = offset.y + 45;
+    if (canvasContainer != undefined) {
+        buttonSettings.x = 140;
+        buttonSettings.y = offset.y + 45;
 
-    var distanceNum = 50;
-    if (curPage != "game") {
-      buttonExit.visible = false;
-      buttonSoundOn.x = buttonSoundOff.x = buttonSettings.x;
-      buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
-      buttonSoundOn.x = buttonSoundOff.x;
-      buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
+        var distanceNum = 50;
+        if (curPage != "game") {
+            buttonExit.visible = false;
+            buttonSoundOn.x = buttonSoundOff.x = buttonSettings.x;
+            buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
+            buttonSoundOn.x = buttonSoundOff.x;
+            buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
 
-      buttonFullscreen.x = buttonSettings.x;
-      buttonFullscreen.y = buttonSettings.y + distanceNum * 2;
-    } else {
-      buttonExit.visible = true;
-      buttonSoundOn.x = buttonSoundOff.x = buttonSettings.x;
-      buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
-      buttonSoundOn.x = buttonSoundOff.x;
-      buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
+            buttonFullscreen.x = buttonSettings.x;
+            buttonFullscreen.y = buttonSettings.y + distanceNum * 2;
+        } else {
+            buttonExit.visible = true;
+            buttonSoundOn.x = buttonSoundOff.x = buttonSettings.x;
+            buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
+            buttonSoundOn.x = buttonSoundOff.x;
+            buttonSoundOn.y = buttonSoundOff.y = buttonSettings.y + distanceNum;
 
-      buttonFullscreen.x = buttonSettings.x;
-      buttonFullscreen.y = buttonSettings.y + distanceNum * 2;
+            buttonFullscreen.x = buttonSettings.x;
+            buttonFullscreen.y = buttonSettings.y + distanceNum * 2;
 
-      buttonExit.x = buttonSettings.x;
-      buttonExit.y = buttonSettings.y + distanceNum * 3;
+            buttonExit.x = buttonSettings.x;
+            buttonExit.y = buttonSettings.y + distanceNum * 3;
+        }
     }
-  }
 }
 
 /*!

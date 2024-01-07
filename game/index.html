@@ -23,53 +23,60 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" >
+
     <style>
-        table, th, td {
+        #tableResult table, th, td {
           border:1px solid #fff;
           padding: 15px;
           text-align: center;
         }
-        th{
+        #tableResult th{
             font-size: 22px;
           font-weight: 600;
         }
-        th {
+         #tableResult th {
          top: 0;
          position: sticky;
          background: #ffbe0b;
          color: #fff;
       }
-        td{
+        #tableResult td{
             font-size: 18px;
           font-weight: 600;
         }
 
             /* CSS cho kích thước màn hình trung bình */
             @media screen and (min-width: 1025px)  {
-                table, th, td {
+                #tableResult table, th, td {
                     padding: 8px 15px;
                     text-align: center;
                 }
             }
             /* CSS cho kích thước màn hình lớn */
             @media screen and (min-width: 1281px)  {
-                table, th, td {
+                #tableResult table, th, td {
                     padding: 12px 20px;
                     text-align: center;
                 }
                 th{
-            font-size: 26px;
-        }
-        td{
-            font-size: 22px;
-        }
+                    font-size: 26px;
+                }
+
             }
 
 
     </style>
   </head>
   <body>
-    <div postion="relative">
+    <div  class="container-f"
+    >
+
+        <!-- <div style="position:absolute; top: 0;left: 0;right: 0;bottom: 0; z-index: 10000;pointer-events: none; ">
+          <canvas id="canvas" width="1280" height="768"
+          ></canvas>
+        </div> -->
       <!-- PERCENT LOADER START-->
       <div id="mainLoader">
         <img src="assets/loader.png" /><br /><span>0</span>
@@ -140,7 +147,7 @@
           "
         >
         <div style="flex: 1;"></div>
-    <div style="flex: 1; color: #fff; margin-top: 70px; margin-left: 150px; overflow: auto; "  id="boxTable" class="zindex-top">
+    <div style="flex: 1; color: #fff; margin-top: 70px; margin-left: 150px; overflow: auto;pointer-events: none; "  id="boxTable" class="zindex-top">
         <table id="tableResult">
              <thead>
                 <tr>
@@ -152,13 +159,53 @@
 
             <!-- Add your table rows here -->
         </table>
-    </div>
 
     </div>
+    <!-- Button trigger modal -->
+   <div class="zindex-top" style="position: absolute; right: 20px;top: 20px;">
+        <button type="button" class="btn btn-warning z-index" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+            <img src = "./assets/icon/gear.svg" alt="icon"/>
+
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade zindex-top-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered zindex-top-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cấu hình trò chơi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="ballQuantity" class="form-label">Số lượng bóng</label>
+                        <input type="number" class="form-control" id="ballQuantity" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="speed" class="form-label">Tốc độ</label>
+                        <input type="number" class="form-control" id="speed" min="0">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button type="button" class="btn btn-warning" id="btnSaveConfig"  data-bs-dismiss="modal"
+                    onclick="saveConfig()"
+                >Lưu</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
       </div>
+
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="./assets/dist/js/bootstrap.bundle.min.js" ></script>
+
     <script>
       window.jQuery ||
         document.write('<script src="js/vendor/jquery.min.js"><\/script>');

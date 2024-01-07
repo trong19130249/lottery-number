@@ -111,9 +111,13 @@ function getIndexNotSpin() {
     }
     return -1;
 }
+var domSpeed = document.querySelector("#speed");
+var domBall = document.querySelector("#ballQuantity");
+
 var selectTextDisplay = "Select [NUMBER] Numbers"; //select number text display
 var ballRadius = 60; //ball radius
-var totalBall = 100; //total balls
+// var totalBall = 100; //total balls
+var totalBall = localStorage.getItem("totalBall") || 100; //total balls
 var listResult = []; //list result
 var spinResult = {
     index: -1,
@@ -123,10 +127,11 @@ var rotateBall = true; //rotate balls in 3d angle
 var numberStartZero = false; //number start from zero instead of one
 
 var spinDirection = true; //true for anticlockwise
-var spinStartSpeed = 5; //spin starting speed
+var spinStartSpeed = 0; //spin starting speed
 var spinEndSpeed = 5; //spin ending speed
 var spinSpeed = 10; //spin speed
-var revealTimer = 6; //reveal ball timer
+// var revealTimer = 6; //reveal ball timer
+var revealTimer = localStorage.getItem("revealTimer") || 6; //reveal ball timer
 
 var prizeTableDisplay = "Score Table"; //score table text display
 var numberTextDisplay = "Your Numbers"; //your score text display
@@ -341,6 +346,23 @@ function buildGameButton() {
     });
 }
 
+function resetDataFormConfig() {
+    domSpeed.value = revealTimer;
+    domBall.value = totalBall;
+}
+resetDataFormConfig();
+
+function saveConfig() {
+    revealTimer = domSpeed.value || 6;
+    totalBall = domBall.value || 100;
+    localStorage.setItem("revealTimer", revealTimer);
+    localStorage.setItem("totalBall", totalBall);
+    window.location.reload();
+}
+$("#exampleModal").on("hidden.bs.modal", function () {
+    resetDataFormConfig();
+});
+
 function appendFocusFrame() {
     $("#mainHolder").prepend(
         '<div id="focus" style="position:absolute; width:100%; height:100%; z-index:1000;"></div'
@@ -366,6 +388,12 @@ function getRandomUniqueNumber(array) {
  */
 var curPage = "";
 var boxTableDocument = document.querySelector("#boxTable");
+function removeZindex() {
+    boxTableDocument.classList.remove("zindex-top");
+}
+function addZindex() {
+    boxTableDocument.classList.add("zindex-top");
+}
 function goPage(page) {
     curPage = page;
 
@@ -388,7 +416,7 @@ function goPage(page) {
 
         case "result":
             //remove class zindex-top boxTableDocument
-            boxTableDocument.classList.remove("zindex-top");
+            removeZindex();
             targetContainer = resultContainer;
             stopGame();
             // if (gameData.matchNum != -1) {
@@ -408,6 +436,9 @@ function goPage(page) {
             //     "[NUMBER]",
             //     "demo"
             // );
+            stopMusicBackground();
+
+            playMusicListBackground();
             console.log(spinResult);
 
             if (spinResult?.index != -1) {
@@ -571,8 +602,8 @@ function startSpin() {
                 updateUserPoint();
             }
         }
-
-        // playSound(listNhac[0]);
+        stopMusicBackground();
+        playSound("soso");
 
         // itemBarUser.visible = true;
         buttonSphereStart.visible = false;
@@ -957,57 +988,57 @@ function createBall(number) {
 }
 
 function updateBallRotate(num, velX, velY, angle) {
-  if (!rotateBall) {
-    return;
-  }
+    if (!rotateBall) {
+        return;
+    }
 
-  var targetBall = gameData.ballsArray[num].obj;
-  var targetRotateBall = gameData.ballsArray[num].rotate;
+    var targetBall = gameData.ballsArray[num].obj;
+    var targetRotateBall = gameData.ballsArray[num].rotate;
 
-  targetRotateBall.x += velX;
-  targetRotateBall.y += velY;
+    targetRotateBall.x += velX;
+    targetRotateBall.y += velY;
 
-  var end = -53;
-  targetRotateBall.x = targetRotateBall.x > 0 ? end : targetRotateBall.x;
-  targetRotateBall.x = targetRotateBall.x < end ? 0 : targetRotateBall.x;
+    var end = -53;
+    targetRotateBall.x = targetRotateBall.x > 0 ? end : targetRotateBall.x;
+    targetRotateBall.x = targetRotateBall.x < end ? 0 : targetRotateBall.x;
 
-  targetRotateBall.y = targetRotateBall.y > 0 ? end : targetRotateBall.y;
-  targetRotateBall.y = targetRotateBall.y < end ? 0 : targetRotateBall.y;
+    targetRotateBall.y = targetRotateBall.y > 0 ? end : targetRotateBall.y;
+    targetRotateBall.y = targetRotateBall.y < end ? 0 : targetRotateBall.y;
 }
 
 function createCages() {
-  var totalNum = 35;
-  var wheelRadius = 360 / totalNum;
+    var totalNum = 35;
+    var wheelRadius = 360 / totalNum;
 
-  for (var n = 0; n < totalNum; n++) {
-    var currentRadius = wheelRadius * n;
-    var newPos = getAnglePositionByValue(
-      gameData.sphereX,
-      gameData.sphereY,
-      gameData.cageRadius,
-      currentRadius
-    );
-    var newHit = itemBallHit.clone();
-    newHit.x = newPos.x;
-    newHit.y = newPos.y;
-    newHit.radius = currentRadius;
+    for (var n = 0; n < totalNum; n++) {
+        var currentRadius = wheelRadius * n;
+        var newPos = getAnglePositionByValue(
+            gameData.sphereX,
+            gameData.sphereY,
+            gameData.cageRadius,
+            currentRadius
+        );
+        var newHit = itemBallHit.clone();
+        newHit.x = newPos.x;
+        newHit.y = newPos.y;
+        newHit.radius = currentRadius;
 
-    gameData.cageArray.push(newHit);
-  }
+        gameData.cageArray.push(newHit);
+    }
 }
 
 function spinCage() {
-  for (var n = 0; n < gameData.cageArray.length; n++) {
-    var targetHit = gameData.cageArray[n];
-    var newPos = getAnglePositionByValue(
-      gameData.sphereX,
-      gameData.sphereY,
-      gameData.cageRadius,
-      targetHit.radius + gameData.radius
-    );
-    targetHit.x = newPos.x;
-    targetHit.y = newPos.y;
-  }
+    for (var n = 0; n < gameData.cageArray.length; n++) {
+        var targetHit = gameData.cageArray[n];
+        var newPos = getAnglePositionByValue(
+            gameData.sphereX,
+            gameData.sphereY,
+            gameData.cageRadius,
+            targetHit.radius + gameData.radius
+        );
+        targetHit.x = newPos.x;
+        targetHit.y = newPos.y;
+    }
 }
 
 /*!
@@ -1017,88 +1048,88 @@ function spinCage() {
  */
 
 function beginWinNumberTimer() {
-  TweenMax.to(ballsContainer, revealTimer, {
-    overwrite: true,
-    onComplete: revealWinNumber,
-  });
+    TweenMax.to(ballsContainer, revealTimer, {
+        overwrite: true,
+        onComplete: revealWinNumber,
+    });
 }
 
 function revealWinNumber() {
-  var tweenNum = gameData.revealArray[gameData.numberNum];
-  var revealNum = gameData.revealArray[gameData.numberNum];
+    var tweenNum = gameData.revealArray[gameData.numberNum];
+    var revealNum = gameData.revealArray[gameData.numberNum];
 
-  var findBallClone = false;
-  for (var p = 0; p < gameData.ballNumber.length; p++) {
-    if (tweenNum == gameData.ballNumber[p].number) {
-      findBallClone = true;
-      tweenNum = gameData.ballNumber[p].index;
-      p = gameData.ballNumber.length;
-    }
-  }
-
-  if (!findBallClone) {
+    var findBallClone = false;
     for (var p = 0; p < gameData.ballNumber.length; p++) {
-      if (!gameData.ballNumber[p].status) {
-        gameData.ballNumber[p].status = true;
-        tweenNum = gameData.ballNumber[p].index;
-        p = gameData.ballNumber.length;
-      }
+        if (tweenNum == gameData.ballNumber[p].number) {
+            findBallClone = true;
+            tweenNum = gameData.ballNumber[p].index;
+            p = gameData.ballNumber.length;
+        }
     }
-  }
 
-  gameData.revealIndex = tweenNum;
-  gameData.winArray.push(tweenNum);
+    if (!findBallClone) {
+        for (var p = 0; p < gameData.ballNumber.length; p++) {
+            if (!gameData.ballNumber[p].status) {
+                gameData.ballNumber[p].status = true;
+                tweenNum = gameData.ballNumber[p].index;
+                p = gameData.ballNumber.length;
+            }
+        }
+    }
 
-  var targetBall = gameData.ballsArray[tweenNum].obj;
-  var targetBallRotate = gameData.ballsArray[tweenNum].rotate;
-  var currentNumber = gameData.revealArray[gameData.numberNum];
-  if (numberStartZero) {
-    currentNumber = pad(currentNumber, 2);
-  } else {
-    currentNumber = pad(currentNumber + 1, 2);
-  }
-  for (var p = 0; p < gameData.ballsArray[tweenNum].text.length; p++) {
-    gameData.ballsArray[tweenNum].text[p].text = currentNumber;
-    gameData.ballsArray[tweenNum].rotate.cache(-30, -30, 120, 120);
-  }
-  gameData.numberNum++;
+    gameData.revealIndex = tweenNum;
+    gameData.winArray.push(tweenNum);
 
-  playSound("soundSuck");
-  TweenMax.to(targetBallRotate, 0.5, {
-    x: 0,
-    y: 0,
-    rotation: 0,
-    overwrite: true,
-  });
-  TweenMax.to(targetBall, 0.5, {
-    x: gameData.sphereX,
-    y: (canvasH / 100) * 71,
-    rotation: 0,
-    scaleX: 1,
-    scaleY: 1,
-    overwrite: true,
-    onComplete: function () {
-      playSound("soundReveal");
-      setRevealBalls();
-      matchWinBalls(revealNum);
+    var targetBall = gameData.ballsArray[tweenNum].obj;
+    var targetBallRotate = gameData.ballsArray[tweenNum].rotate;
+    var currentNumber = gameData.revealArray[gameData.numberNum];
+    if (numberStartZero) {
+        currentNumber = pad(currentNumber, 2);
+    } else {
+        currentNumber = pad(currentNumber + 1, 2);
+    }
+    for (var p = 0; p < gameData.ballsArray[tweenNum].text.length; p++) {
+        gameData.ballsArray[tweenNum].text[p].text = currentNumber;
+        gameData.ballsArray[tweenNum].rotate.cache(-30, -30, 120, 120);
+    }
+    gameData.numberNum++;
 
-      TweenMax.to(targetBall, 0.2, {
-        delay: 1,
-        x: gameData.sphereX,
-        y: (canvasH / 100) * 80,
+    playSound("soundSuck");
+    TweenMax.to(targetBallRotate, 0.5, {
+        x: 0,
+        y: 0,
         rotation: 0,
         overwrite: true,
-      });
-    },
-  });
+    });
+    TweenMax.to(targetBall, 0.5, {
+        x: gameData.sphereX,
+        y: (canvasH / 100) * 71,
+        rotation: 0,
+        scaleX: 1,
+        scaleY: 1,
+        overwrite: true,
+        onComplete: function () {
+            playSound("soundReveal");
+            setRevealBalls();
+            matchWinBalls(revealNum);
 
-  var extraBall = bonusBall == true ? 1 : 0;
-  endGame();
-  //   if (gameData.numberNum < score_arr.length + extraBall) {
-  //     beginWinNumberTimer();
-  //   } else {
-  //     endGame();
-  //   }
+            TweenMax.to(targetBall, 0.2, {
+                delay: 1,
+                x: gameData.sphereX,
+                y: (canvasH / 100) * 80,
+                rotation: 0,
+                overwrite: true,
+            });
+        },
+    });
+
+    var extraBall = bonusBall == true ? 1 : 0;
+    endGame();
+    //   if (gameData.numberNum < score_arr.length + extraBall) {
+    //     beginWinNumberTimer();
+    //   } else {
+    //     endGame();
+    //   }
 }
 
 /*!
@@ -1107,62 +1138,64 @@ function revealWinNumber() {
  *
  */
 function setRevealBalls() {
-  ballsRevealContainer.removeAllChildren();
+    ballsRevealContainer.removeAllChildren();
 
-  var extraBall = bonusBall == true ? 1 : 0;
-  var totalBalls = score_arr.length + extraBall;
-  var totalSplit = Math.floor(totalBalls / 2);
-  var spaceX = 1;
-  var startX = itemBar.x - spaceX * totalSplit;
+    var extraBall = bonusBall == true ? 1 : 0;
+    var totalBalls = score_arr.length + extraBall;
+    var totalSplit = Math.floor(totalBalls / 2);
+    var spaceX = 1;
+    var startX = itemBar.x - spaceX * totalSplit;
 
-  if (isEven(totalBalls)) {
-    startX += spaceX / 2;
-  }
-  if (bonusBall) {
-    startX -= spaceX / 5;
-  }
-  var startY = itemBar.y - 3;
+    if (isEven(totalBalls)) {
+        startX += spaceX / 2;
+    }
+    if (bonusBall) {
+        startX -= spaceX / 5;
+    }
+    var startY = itemBar.y - 3;
 
-  for (var n = 0; n < score_arr.length; n++) {
-    if (n < gameData.winArray.length) {
-      var currentBallRotate = gameData.ballsArray[gameData.winArray[n]].rotate;
-      currentBallRotate.x = currentBallRotate.y = 0;
-      var newGuessBall =
-        gameData.ballsArray[gameData.winArray[n]].obj.clone(true);
-      newGuessBall.x = startX;
-      newGuessBall.y = startY;
-    } else {
-      var newGuessBall = itemBallGuess.clone();
-      newGuessBall.x = startX;
-      newGuessBall.y = startY;
+    for (var n = 0; n < score_arr.length; n++) {
+        if (n < gameData.winArray.length) {
+            var currentBallRotate =
+                gameData.ballsArray[gameData.winArray[n]].rotate;
+            currentBallRotate.x = currentBallRotate.y = 0;
+            var newGuessBall =
+                gameData.ballsArray[gameData.winArray[n]].obj.clone(true);
+            newGuessBall.x = startX;
+            newGuessBall.y = startY;
+        } else {
+            var newGuessBall = itemBallGuess.clone();
+            newGuessBall.x = startX;
+            newGuessBall.y = startY;
+        }
+
+        ballsRevealContainer.addChild(newGuessBall);
+        startX += spaceX;
     }
 
-    ballsRevealContainer.addChild(newGuessBall);
-    startX += spaceX;
-  }
+    if (bonusBall) {
+        startX += spaceX / 3;
 
-  if (bonusBall) {
-    startX += spaceX / 3;
+        if (gameData.winArray.length > score_arr.length) {
+            var currentBallRotate =
+                gameData.ballsArray[
+                    gameData.winArray[gameData.winArray.length - 1]
+                ].rotate;
+            currentBallRotate.x = currentBallRotate.y = 0;
+            var newGuessBall =
+                gameData.ballsArray[
+                    gameData.winArray[gameData.winArray.length - 1]
+                ].obj.clone(true);
+            newGuessBall.x = startX;
+            newGuessBall.y = startY;
+        } else {
+            var newGuessBall = itemBallBonus.clone();
+            newGuessBall.x = startX;
+            newGuessBall.y = startY;
+        }
 
-    if (gameData.winArray.length > score_arr.length) {
-      var currentBallRotate =
-        gameData.ballsArray[gameData.winArray[gameData.winArray.length - 1]]
-          .rotate;
-      currentBallRotate.x = currentBallRotate.y = 0;
-      var newGuessBall =
-        gameData.ballsArray[
-          gameData.winArray[gameData.winArray.length - 1]
-        ].obj.clone(true);
-      newGuessBall.x = startX;
-      newGuessBall.y = startY;
-    } else {
-      var newGuessBall = itemBallBonus.clone();
-      newGuessBall.x = startX;
-      newGuessBall.y = startY;
+        ballsRevealContainer.addChild(newGuessBall);
     }
-
-    ballsRevealContainer.addChild(newGuessBall);
-  }
 }
 
 /*!
@@ -1171,57 +1204,57 @@ function setRevealBalls() {
  *
  */
 function setSelectBalls() {
-  ballsSelectContainer.removeAllChildren();
-  gameData.dimArray = [];
+    ballsSelectContainer.removeAllChildren();
+    gameData.dimArray = [];
 
-  var totalSplit = Math.floor(score_arr.length / 2);
-  var spaceX = 65;
-  var startX = itemBarUser.x - spaceX * totalSplit;
-  if (isEven(score_arr.length)) {
-    startX += spaceX / 2;
-  }
-  var startY = itemBarUser.y - 3;
-
-  var storeNumber = gameData.ballsArray[0].text[0].text;
-
-  for (var n = 0; n < gameData.selectArray.length; n++) {
-    var currentBallRotate = gameData.ballsArray[0].rotate;
-    currentBallRotate.x = currentBallRotate.y = 0;
-
-    //set current number
-    var currentNumber = gameData.selectArray[n];
-    if (numberStartZero) {
-      currentNumber = pad(currentNumber, 2);
-    } else {
-      currentNumber = pad(currentNumber + 1, 2);
+    var totalSplit = Math.floor(score_arr.length / 2);
+    var spaceX = 65;
+    var startX = itemBarUser.x - spaceX * totalSplit;
+    if (isEven(score_arr.length)) {
+        startX += spaceX / 2;
     }
+    var startY = itemBarUser.y - 3;
+
+    var storeNumber = gameData.ballsArray[0].text[0].text;
+
+    for (var n = 0; n < gameData.selectArray.length; n++) {
+        var currentBallRotate = gameData.ballsArray[0].rotate;
+        currentBallRotate.x = currentBallRotate.y = 0;
+
+        //set current number
+        var currentNumber = gameData.selectArray[n];
+        if (numberStartZero) {
+            currentNumber = pad(currentNumber, 2);
+        } else {
+            currentNumber = pad(currentNumber + 1, 2);
+        }
+        for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
+            gameData.ballsArray[0].text[p].text = currentNumber;
+            gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
+        }
+
+        var newGuessBall = gameData.ballsArray[0].obj.clone(true);
+        newGuessBall.scaleX = newGuessBall.scaleY = 1;
+        newGuessBall.x = startX;
+        newGuessBall.y = startY;
+        newGuessBall.rotation = 0;
+
+        var newDimBall = itemBallDim.clone();
+        newDimBall.x = startX;
+        newDimBall.y = startY;
+        newDimBall.active = true;
+        newDimBall.selectNumber = gameData.selectArray[n];
+        gameData.dimArray.push(newDimBall);
+
+        startX += spaceX;
+        ballsSelectContainer.addChild(newGuessBall, newDimBall);
+    }
+
+    //set back number
     for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
-      gameData.ballsArray[0].text[p].text = currentNumber;
-      gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
+        gameData.ballsArray[0].text[p].text = storeNumber;
+        gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
     }
-
-    var newGuessBall = gameData.ballsArray[0].obj.clone(true);
-    newGuessBall.scaleX = newGuessBall.scaleY = 1;
-    newGuessBall.x = startX;
-    newGuessBall.y = startY;
-    newGuessBall.rotation = 0;
-
-    var newDimBall = itemBallDim.clone();
-    newDimBall.x = startX;
-    newDimBall.y = startY;
-    newDimBall.active = true;
-    newDimBall.selectNumber = gameData.selectArray[n];
-    gameData.dimArray.push(newDimBall);
-
-    startX += spaceX;
-    ballsSelectContainer.addChild(newGuessBall, newDimBall);
-  }
-
-  //set back number
-  for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
-    gameData.ballsArray[0].text[p].text = storeNumber;
-    gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
-  }
 }
 
 /*!
@@ -1230,58 +1263,58 @@ function setSelectBalls() {
  *
  */
 function matchWinBalls(number) {
-  var oldMatch = gameData.matchNum;
+    var oldMatch = gameData.matchNum;
 
-  for (var n = 0; n < gameData.selectArray.length; n++) {
-    //if(gameData.winArray.indexOf(gameData.selectArray[n]) != -1){
-    if (gameData.dimArray[n].selectNumber == number) {
-      if (gameData.dimArray[n].active) {
-        gameData.matchNum++;
-        gameData.dimArray[n].active = false;
-        animateHighlight(gameData.dimArray[n]);
-      }
-    }
-  }
-
-  if (oldMatch == gameData.matchNum) {
-    return;
-  }
-
-  var extraBall = bonusBall == true ? 1 : 0;
-  var totalMatchNum = score_arr.length + extraBall;
-  totalMatchNum--;
-
-  for (var n = 0; n < score_arr.length; n++) {
-    if (gameData.matchNum == n) {
-      var targetNum = totalMatchNum - n;
-      if (bonusBall && gameData.matchNum == score_arr.length - 1) {
-        if (gameData.winArray.length > score_arr.length) {
-          //bonus
-        } else {
-          targetNum = 0;
+    for (var n = 0; n < gameData.selectArray.length; n++) {
+        //if(gameData.winArray.indexOf(gameData.selectArray[n]) != -1){
+        if (gameData.dimArray[n].selectNumber == number) {
+            if (gameData.dimArray[n].active) {
+                gameData.matchNum++;
+                gameData.dimArray[n].active = false;
+                animateHighlight(gameData.dimArray[n]);
+            }
         }
-      }
-      TweenMax.to($.prize["bg" + targetNum], 1, {
-        overwrite: true,
-        onComplete: animatePrize,
-        onCompleteParams: [targetNum],
-      });
     }
-  }
+
+    if (oldMatch == gameData.matchNum) {
+        return;
+    }
+
+    var extraBall = bonusBall == true ? 1 : 0;
+    var totalMatchNum = score_arr.length + extraBall;
+    totalMatchNum--;
+
+    for (var n = 0; n < score_arr.length; n++) {
+        if (gameData.matchNum == n) {
+            var targetNum = totalMatchNum - n;
+            if (bonusBall && gameData.matchNum == score_arr.length - 1) {
+                if (gameData.winArray.length > score_arr.length) {
+                    //bonus
+                } else {
+                    targetNum = 0;
+                }
+            }
+            TweenMax.to($.prize["bg" + targetNum], 1, {
+                overwrite: true,
+                onComplete: animatePrize,
+                onCompleteParams: [targetNum],
+            });
+        }
+    }
 }
 
 function animatePrize(num) {
-  var extraBall = bonusBall == true ? 1 : 0;
-  for (var n = 0; n < score_arr.length + extraBall; n++) {
-    $.prize["bg" + n].alpha = 1;
-    $.prize["bgselect" + n].alpha = 1;
-    $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
-  }
+    var extraBall = bonusBall == true ? 1 : 0;
+    for (var n = 0; n < score_arr.length + extraBall; n++) {
+        $.prize["bg" + n].alpha = 1;
+        $.prize["bgselect" + n].alpha = 1;
+        $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
+    }
 
-  playSound("soundWin");
-  animateHighlight($.prize["bg" + num]);
-  $.prize["text" + num].color = $.prize["score" + num].color = "#fff";
-  playerData.score = $.prize["score" + num].score;
+    playSound("soundWin");
+    animateHighlight($.prize["bg" + num]);
+    $.prize["text" + num].color = $.prize["score" + num].color = "#fff";
+    playerData.score = $.prize["score" + num].score;
 }
 
 /*!
@@ -1290,35 +1323,35 @@ function animatePrize(num) {
  *
  */
 function animateHighlight(obj) {
-  TweenMax.to(obj, 0.1, {
-    alpha: 0.2,
-    overwrite: true,
-    onComplete: function () {
-      TweenMax.to(obj, 0.1, {
-        alpha: 1,
+    TweenMax.to(obj, 0.1, {
+        alpha: 0.2,
         overwrite: true,
         onComplete: function () {
-          TweenMax.to(obj, 0.1, {
-            alpha: 0.2,
-            overwrite: true,
-            onComplete: function () {
-              TweenMax.to(obj, 0.1, {
+            TweenMax.to(obj, 0.1, {
                 alpha: 1,
                 overwrite: true,
                 onComplete: function () {
-                  TweenMax.to(obj, 0.1, {
-                    alpha: 0,
-                    overwrite: true,
-                    onComplete: function () {},
-                  });
+                    TweenMax.to(obj, 0.1, {
+                        alpha: 0.2,
+                        overwrite: true,
+                        onComplete: function () {
+                            TweenMax.to(obj, 0.1, {
+                                alpha: 1,
+                                overwrite: true,
+                                onComplete: function () {
+                                    TweenMax.to(obj, 0.1, {
+                                        alpha: 0,
+                                        overwrite: true,
+                                        onComplete: function () {},
+                                    });
+                                },
+                            });
+                        },
+                    });
                 },
-              });
-            },
-          });
+            });
         },
-      });
-    },
-  });
+    });
 }
 
 /*!
@@ -1327,34 +1360,34 @@ function animateHighlight(obj) {
  *
  */
 function endGame() {
-  TweenMax.to(radiusTweenData, spinEndSpeed, { radius: 0, overwrite: true });
-  //   buttonSphereStart.visible = true;
+    TweenMax.to(radiusTweenData, spinEndSpeed, { radius: 0, overwrite: true });
+    //   buttonSphereStart.visible = true;
 
-  TweenMax.to(soundTweenData, spinEndSpeed, {
-    volume: 0.1,
-    overwrite: true,
-    onUpdate: updateBallsVolume,
-  });
-  // set 5s delay to show result
-  //   TweenMax.to(ballsContainer, 20, {
-  //     overwrite: true,
-  //     onComplete: function () {
-  //       //memberpayment
-  //       goPage("game");
-  //     },
-  //   });
+    TweenMax.to(soundTweenData, spinEndSpeed, {
+        volume: 0.1,
+        overwrite: true,
+        onUpdate: updateBallsVolume,
+    });
+    // set 5s delay to show result
+    //   TweenMax.to(ballsContainer, 20, {
+    //     overwrite: true,
+    //     onComplete: function () {
+    //       //memberpayment
+    //       goPage("game");
+    //     },
+    //   });
 
-  TweenMax.to(ballsContainer, 4, {
-    overwrite: true,
-    onComplete: function () {
-      //memberpayment
-      if (typeof memberData != "undefined") {
-        updateUserPoint();
-      }
+    TweenMax.to(ballsContainer, 4, {
+        overwrite: true,
+        onComplete: function () {
+            //memberpayment
+            if (typeof memberData != "undefined") {
+                updateUserPoint();
+            }
 
-      goPage("result");
-    },
-  });
+            goPage("result");
+        },
+    });
 }
 
 /*!
@@ -1363,106 +1396,110 @@ function endGame() {
  *
  */
 function createPercentage() {
-  gameData.percentageArray = [];
+    gameData.percentageArray = [];
 
-  var extraBall = bonusBall == true ? 1 : 0;
-  var totalNum = score_arr.length + extraBall;
-  var totalBall = 0;
-  var percent = 0;
-  var isBonusBall = false;
+    var extraBall = bonusBall == true ? 1 : 0;
+    var totalNum = score_arr.length + extraBall;
+    var totalBall = 0;
+    var percent = 0;
+    var isBonusBall = false;
 
-  for (var n = 0; n < score_arr.length + extraBall; n++) {
-    isBonusBall = false;
+    for (var n = 0; n < score_arr.length + extraBall; n++) {
+        isBonusBall = false;
 
-    if (bonusBall) {
-      if (n == 0) {
-        totalNum--;
-        totalBall = totalNum;
-        percent = score_arr[totalNum - 1].percent;
-      } else if (n == 1) {
-        totalBall = totalNum;
-        percent = bonusScore[0].percent;
-        totalNum++;
-        isBonusBall = true;
-      } else {
-        totalBall = totalNum;
-        percent = score_arr[totalNum - 1].percent;
-      }
-    } else {
-      totalBall = totalNum;
-      percent = score_arr[totalNum - 1].percent;
-    }
-
-    totalNum--;
-    if (!isNaN(percent)) {
-      if (percent > 0) {
-        for (var p = 0; p < percent; p++) {
-          gameData.percentageArray.push({
-            total: totalNum,
-            bonus: isBonusBall,
-          });
+        if (bonusBall) {
+            if (n == 0) {
+                totalNum--;
+                totalBall = totalNum;
+                percent = score_arr[totalNum - 1].percent;
+            } else if (n == 1) {
+                totalBall = totalNum;
+                percent = bonusScore[0].percent;
+                totalNum++;
+                isBonusBall = true;
+            } else {
+                totalBall = totalNum;
+                percent = score_arr[totalNum - 1].percent;
+            }
+        } else {
+            totalBall = totalNum;
+            percent = score_arr[totalNum - 1].percent;
         }
-      }
-    }
-  }
 
-  for (var n = gameData.percentageArray.length; n < 100; n++) {
-    gameData.percentageArray.push({ total: 0, bonus: false });
-  }
+        totalNum--;
+        if (!isNaN(percent)) {
+            if (percent > 0) {
+                for (var p = 0; p < percent; p++) {
+                    gameData.percentageArray.push({
+                        total: totalNum,
+                        bonus: isBonusBall,
+                    });
+                }
+            }
+        }
+    }
+
+    for (var n = gameData.percentageArray.length; n < 100; n++) {
+        gameData.percentageArray.push({ total: 0, bonus: false });
+    }
 }
 
 function getResultOnPercent() {
-  shuffle(gameData.percentageArray);
+    shuffle(gameData.percentageArray);
 
-  var selectArray = [];
-  var leftArray = [];
+    var selectArray = [];
+    var leftArray = [];
 
-  for (var n = 0; n < gameData.selectArray.length; n++) {
-    selectArray.push(gameData.selectArray[n]);
-  }
-
-  shuffle(selectArray);
-
-  var extraBall = bonusBall == true ? 1 : 0;
-  var numberIndex = 0;
-  for (var b = 0; b < score_arr.length; b++) {
-    if (selectArray.indexOf(gameData.numberArray[numberIndex]) == -1) {
-      gameData.revealArray.push(gameData.numberArray[numberIndex]);
-    } else {
-      b--;
+    for (var n = 0; n < gameData.selectArray.length; n++) {
+        selectArray.push(gameData.selectArray[n]);
     }
-    numberIndex++;
-  }
 
-  var bonusNum = 0;
-  if (gameData.percentageArray[0].total > 0) {
-    for (var n = 0; n < gameData.percentageArray[0].total; n++) {
-      gameData.revealArray[n] = selectArray[n];
+    shuffle(selectArray);
 
-      if (
-        gameData.percentageArray[0].bonus &&
-        n == gameData.percentageArray[0].total - 1
-      ) {
-        bonusNum = selectArray[n + 1];
-      }
-    }
-    shuffle(gameData.revealArray);
-  }
-
-  if (extraBall) {
-    if (gameData.percentageArray[0].bonus) {
-      gameData.revealArray.push(bonusNum);
-    } else {
-      for (var b = 0; b < 1; b++) {
+    var extraBall = bonusBall == true ? 1 : 0;
+    var numberIndex = 0;
+    for (var b = 0; b < score_arr.length; b++) {
         if (selectArray.indexOf(gameData.numberArray[numberIndex]) == -1) {
-          gameData.revealArray.push(gameData.numberArray[numberIndex]);
+            gameData.revealArray.push(gameData.numberArray[numberIndex]);
         } else {
-          b--;
+            b--;
         }
         numberIndex++;
-      }
     }
-  }
+
+    var bonusNum = 0;
+    if (gameData.percentageArray[0].total > 0) {
+        for (var n = 0; n < gameData.percentageArray[0].total; n++) {
+            gameData.revealArray[n] = selectArray[n];
+
+            if (
+                gameData.percentageArray[0].bonus &&
+                n == gameData.percentageArray[0].total - 1
+            ) {
+                bonusNum = selectArray[n + 1];
+            }
+        }
+        shuffle(gameData.revealArray);
+    }
+
+    if (extraBall) {
+        if (gameData.percentageArray[0].bonus) {
+            gameData.revealArray.push(bonusNum);
+        } else {
+            for (var b = 0; b < 1; b++) {
+                if (
+                    selectArray.indexOf(gameData.numberArray[numberIndex]) == -1
+                ) {
+                    gameData.revealArray.push(
+                        gameData.numberArray[numberIndex]
+                    );
+                } else {
+                    b--;
+                }
+                numberIndex++;
+            }
+        }
+    }
 }
 
 /*!
@@ -1472,11 +1509,13 @@ function getResultOnPercent() {
  */
 
 function toggleOption() {
-  if (optionsContainer.visible) {
-    optionsContainer.visible = false;
-  } else {
-    optionsContainer.visible = true;
-  }
+    if (optionsContainer.visible) {
+        addZindex();
+        optionsContainer.visible = false;
+    } else {
+        removeZindex();
+        optionsContainer.visible = true;
+    }
 }
 
 /*!

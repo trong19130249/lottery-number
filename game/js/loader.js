@@ -89,6 +89,7 @@ function initPreload() {
       manifest.push({ src: "assets/sounds/random.ogg", id: "soundRandom" });
       manifest.push({ src: "assets/sounds/cage.ogg", id: "soundCage" });
       manifest.push({ src: "assets/sounds/fail.ogg", id: "soundFail" });
+      manifest.push({ src: "assets/nhac/list/soso.mp3", id: "soso" });
       manifest.push({ src: "assets/nhac/play.mp3", id: "play" });
       listNhac.forEach((element) => {
           manifest.push({

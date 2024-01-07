@@ -136,6 +136,9 @@ html{-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-user-select: none;-webki
 .zindex-top {
     z-index: 9999;
 }
+.zindex-top-modal{
+    z-index: 10001 !important;
+}
 /*-- Percent Loader -- */
 #mainLoader{position:absolute;z-index:5; display:none; font-size:20px; line-height:25px; color:#fff; text-align:center; width:100%; font-family:'roboto';}
 

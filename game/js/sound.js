@@ -62,6 +62,12 @@ function playMusicListBackground() {
         playMusicList();
     }
 }
+//stop music background
+function stopMusicBackground() {
+    isPlaying = false;
+    createjs.Sound.stop();
+}
+
 
 
 function stopSound() {
