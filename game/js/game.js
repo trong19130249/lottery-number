@@ -47,7 +47,7 @@ var giaThuong = [
     },
     {
         key: "g7",
-        giai: "Giải Khuyến khích",
+        giai: "Giải ba",
         giaithuong: "",
     },
     {
@@ -67,6 +67,16 @@ var giaThuong = [
     },
     {
         key: "g11",
+        giai: "Giải Khuyến khích",
+        giaithuong: "",
+    },
+    {
+        key: "g12",
+        giai: "Giải Khuyến khích",
+        giaithuong: "",
+    },
+    {
+        key: "g13",
         giai: "Giải Khuyến khích",
         giaithuong: "",
     },
@@ -236,10 +246,8 @@ function buildGameButton() {
         // save local storage
         // get item by result
         var itemGiaiThuongResult = giaThuong[spinResult?.index];
-        var data = localStorage.getItem(itemGiaiThuongResult.key);
-        if (!data) {
-            localStorage.setItem(itemGiaiThuongResult.key, spinResult?.result);
-        }
+        localStorage.setItem(itemGiaiThuongResult.key, spinResult?.result);
+        giaThuong[spinResult?.index].giaithuong = spinResult?.result;
         document.getElementById(itemGiaiThuongResult.key).innerHTML =
             spinResult?.result;
     });
