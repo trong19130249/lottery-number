@@ -10,116 +10,116 @@
 
 var queryTabe = document.querySelector("#tableResult");
 var giaThuong = [
-    {
-        key: "gdb",
-        giai: "Giải đặc biệt",
-        giaithuong: "",
-    },
-    {
-        key: "g1",
-        giai: "Giải nhất",
-        giaithuong: "",
-    },
-    {
-        key: "g2",
-        giai: "Giải nhì",
-        giaithuong: "",
-    },
-    {
-        key: "g3",
-        giai: "Giải nhì",
-        giaithuong: "",
-    },
-    {
-        key: "g4",
-        giai: "Giải ba",
-        giaithuong: "",
-    },
-    {
-        key: "g5",
-        giai: "Giải ba",
-        giaithuong: "",
-    },
-    {
-        key: "g6",
-        giai: "Giải ba",
-        giaithuong: "",
-    },
-    {
-        key: "g7",
-        giai: "Giải ba",
-        giaithuong: "",
-    },
-    {
-        key: "g8",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
-    {
-        key: "g9",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
-    {
-        key: "g10",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
-    {
-        key: "g11",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
-    {
-        key: "g12",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
-    {
-        key: "g13",
-        giai: "Giải Khuyến khích",
-        giaithuong: "",
-    },
+  {
+    key: "gdb",
+    giai: "Giải đặc biệt",
+    giaithuong: "",
+  },
+  {
+    key: "g1",
+    giai: "Giải nhất",
+    giaithuong: "",
+  },
+  {
+    key: "g2",
+    giai: "Giải nhì",
+    giaithuong: "",
+  },
+  {
+    key: "g3",
+    giai: "Giải nhì",
+    giaithuong: "",
+  },
+  {
+    key: "g4",
+    giai: "Giải ba",
+    giaithuong: "",
+  },
+  {
+    key: "g5",
+    giai: "Giải ba",
+    giaithuong: "",
+  },
+  {
+    key: "g6",
+    giai: "Giải ba",
+    giaithuong: "",
+  },
+  {
+    key: "g7",
+    giai: "Giải ba",
+    giaithuong: "",
+  },
+  {
+    key: "g8",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
+  {
+    key: "g9",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
+  {
+    key: "g10",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
+  {
+    key: "g11",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
+  {
+    key: "g12",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
+  {
+    key: "g13",
+    giai: "Giải Khuyến khích",
+    giaithuong: "",
+  },
 ];
 //giaThuong load data from local storage  loop
 for (var i = 0; i < giaThuong.length; i++) {
-    var data = localStorage.getItem(giaThuong[i].key);
-    if (data) {
-        giaThuong[i].giaithuong = data;
-    }
+  var data = localStorage.getItem(giaThuong[i].key);
+  if (data) {
+    giaThuong[i].giaithuong = data;
+  }
 }
 // refresh data from giaThuong
 function refreshData() {
-    for (var i = 0; i < giaThuong.length; i++) {
-        var tr = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
+  for (var i = 0; i < giaThuong.length; i++) {
+    var tr = document.createElement("tr");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
 
-        td1.innerHTML = i + 1;
-        td2.innerHTML = giaThuong[i].giai;
-        td3.innerHTML = giaThuong[i].giaithuong;
-        td3.setAttribute("id", giaThuong[i].key);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        queryTabe.appendChild(tr);
-    }
+    td1.innerHTML = i + 1;
+    td2.innerHTML = giaThuong[i].giai;
+    td3.innerHTML = giaThuong[i].giaithuong;
+    td3.setAttribute("id", giaThuong[i].key);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    queryTabe.appendChild(tr);
+  }
 }
 refreshData();
 // lấy index giai thưởng chưa quay
 function getIndexNotSpin() {
-    // for (var i = 0; i < giaThuong.length; i++) {
-    //     if (giaThuong[i].giaithuong == "") {
-    //         return i;
-    //     }
-    // }
-    for (var i = giaThuong.length - 1; i >= 0; i--) {
-        if (giaThuong[i].giaithuong == "") {
-            return i;
-        }
+  // for (var i = 0; i < giaThuong.length; i++) {
+  //     if (giaThuong[i].giaithuong == "") {
+  //         return i;
+  //     }
+  // }
+  for (var i = giaThuong.length - 1; i >= 0; i--) {
+    if (giaThuong[i].giaithuong == "") {
+      return i;
     }
-    return -1;
+  }
+  return -1;
 }
 var domSpeed = document.querySelector("#speed");
 var domBall = document.querySelector("#ballQuantity");
@@ -130,8 +130,8 @@ var ballRadius = 60; //ball radius
 var totalBall = localStorage.getItem("totalBall") || 100; //total balls
 var listResult = []; //list result
 var spinResult = {
-    index: -1,
-    result: -1,
+  index: -1,
+  result: -1,
 };
 var rotateBall = true; //rotate balls in 3d angle
 var numberStartZero = false; //number start from zero instead of one
@@ -155,12 +155,12 @@ var enablePercentage = false; //option to have result base on percentage
 
 //score points array and also the total number to reveal
 var score_arr = [
-    { prize: 50, percent: 25 },
-    //   { prize: 100, percent: 20 },
-    //   { prize: 500, percent: 15 },
-    //   { prize: 1000, percent: 10 },
-    //   { prize: 10000, percent: 5 },
-    //   { prize: 100000, percent: 1 },
+  { prize: 50, percent: 25 },
+  //   { prize: 100, percent: 20 },
+  //   { prize: 500, percent: 15 },
+  //   { prize: 1000, percent: 10 },
+  //   { prize: 10000, percent: 5 },
+  //   { prize: 100000, percent: 1 },
 ];
 
 //bonus score point
@@ -172,10 +172,10 @@ var resultFailText = "YOU DIDN'T WIN!"; //result fail text display
 
 //Social share, [SCORE] will replace with game score
 var shareEnable = true; //toggle share
-var shareText = "[GIAI] có kết quả là: [RESULT]"; //social share message
+var shareText = "[GIAI] có kết quả là [RESULT]"; //social share message
 var shareTitle = "Highscore on Lottery Numbers Game is [SCORE]PTS."; //social share score title
 var shareMessage =
-    "[SCORE]PTS is mine new highscore on Lottery Numbers Game! Try it now!"; //social share score message
+  "[SCORE]PTS is mine new highscore on Lottery Numbers Game! Try it now!"; //social share score message
 /*!
  *
  * GAME SETTING CUSTOMIZATION END
@@ -184,26 +184,26 @@ var shareMessage =
 
 var playerData = { score: 0 };
 var gameData = {
-    paused: true,
-    sphereX: 400,
-    sphereY: 325,
-    cageRadius: 225,
-    radius: 0,
-    spin: false,
-    selectNum: 0,
-    numberNum: 0,
-    numberArray: [],
-    selectArray: [],
-    winArray: [],
-    buttonArray: [],
-    indexArray: [],
-    dimArray: [],
-    matchNum: 0,
-    ballsArray: [],
-    cageArray: [],
-    revealArray: [],
-    totalBall: [],
-    ballNumber: [],
+  paused: true,
+  sphereX: 400,
+  sphereY: 325,
+  cageRadius: 225,
+  radius: 0,
+  spin: false,
+  selectNum: 0,
+  numberNum: 0,
+  numberArray: [],
+  selectArray: [],
+  winArray: [],
+  buttonArray: [],
+  indexArray: [],
+  dimArray: [],
+  matchNum: 0,
+  ballsArray: [],
+  cageArray: [],
+  revealArray: [],
+  totalBall: [],
+  ballNumber: [],
 };
 var radiusTweenData = { radius: 0 };
 var soundTweenData = { volume: 0 };
@@ -217,176 +217,175 @@ var ballData = { radius: 60, scale: 1 };
  *
  */
 function buildGameButton() {
-    if ($.browser.mobile || isTablet) {
-    } else {
-        var isInIframe =
-            window.location != window.parent.location ? true : false;
-        if (isInIframe) {
-            $(window).blur(function () {
-                appendFocusFrame();
-            });
-            appendFocusFrame();
-        }
+  if ($.browser.mobile || isTablet) {
+  } else {
+    var isInIframe = window.location != window.parent.location ? true : false;
+    if (isInIframe) {
+      $(window).blur(function () {
+        appendFocusFrame();
+      });
+      appendFocusFrame();
     }
+  }
 
-    if (enablePercentage) {
-        createPercentage();
-    }
+  if (enablePercentage) {
+    createPercentage();
+  }
 
-    buttonStart.cursor = "pointer";
-    buttonStart.addEventListener("click", function (evt) {
-        playSound("soundClick");
-        goPage("game");
+  buttonStart.cursor = "pointer";
+  buttonStart.addEventListener("click", function (evt) {
+    playSound("soundClick");
+    goPage("game");
+  });
+
+  buttonContinue.cursor = "pointer";
+  buttonContinue.addEventListener("click", function (evt) {
+    playSound("soundClick");
+    goPage("game");
+    // save local storage
+    // get item by result
+    var itemGiaiThuongResult = giaThuong[spinResult?.index];
+    localStorage.setItem(itemGiaiThuongResult.key, spinResult?.result);
+    giaThuong[spinResult?.index].giaithuong = spinResult?.result;
+    document.getElementById(itemGiaiThuongResult.key).innerHTML =
+      spinResult?.result;
+  });
+
+  buttonCancelResult.cursor = "pointer";
+  buttonCancelResult.addEventListener("click", function (evt) {
+    playSound("soundFail");
+    goPage("game");
+  });
+
+  buttonTwitter.visible = false;
+  buttonFacebook.visible = false;
+  buttonWhatsapp.visible = false;
+  buttonFacebook.cursor = "pointer";
+  buttonFacebook.addEventListener("click", function (evt) {
+    share("facebook");
+  });
+  buttonTwitter.cursor = "pointer";
+  buttonTwitter.addEventListener("click", function (evt) {
+    share("twitter");
+  });
+  buttonWhatsapp.cursor = "pointer";
+  buttonWhatsapp.addEventListener("click", function (evt) {
+    share("whatsapp");
+  });
+
+  buttonSoundOff.cursor = "pointer";
+  buttonSoundOff.addEventListener("click", function (evt) {
+    toggleGameMute(true);
+  });
+
+  buttonSoundOn.cursor = "pointer";
+  buttonSoundOn.addEventListener("click", function (evt) {
+    toggleGameMute(false);
+  });
+
+  buttonFullscreen.cursor = "pointer";
+  buttonFullscreen.addEventListener("click", function (evt) {
+    toggleFullScreen();
+  });
+
+  buttonExit.cursor = "pointer";
+  buttonExit.addEventListener("click", function (evt) {
+    toggleConfirm(true);
+  });
+
+  buttonSettings.cursor = "pointer";
+  buttonSettings.addEventListener("click", function (evt) {
+    toggleOption();
+  });
+
+  buttonConfirm.cursor = "pointer";
+
+  // Check for user gesture before starting the AudioContext
+  document.addEventListener(
+    "click",
+    function () {
+      var audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+      playMusicListBackground(audioContext);
+    },
+    { once: true }
+  );
+  buttonConfirm.addEventListener("click", function (evt) {
+    toggleConfirm(false);
+    stopGame();
+    goPage("main");
+    // reset local storage
+    // clear tat ca giaThuong         // set text html
+
+    giaThuong.forEach((element) => {
+      localStorage.removeItem(element.key);
+      document.getElementById(element.key).innerHTML = "";
+      element.giaithuong = ""; // reset giai thuong
     });
+  });
 
-    buttonContinue.cursor = "pointer";
-    buttonContinue.addEventListener("click", function (evt) {
-        playSound("soundClick");
-        goPage("game");
-        // save local storage
-        // get item by result
-        var itemGiaiThuongResult = giaThuong[spinResult?.index];
-        localStorage.setItem(itemGiaiThuongResult.key, spinResult?.result);
-        giaThuong[spinResult?.index].giaithuong = spinResult?.result;
-        document.getElementById(itemGiaiThuongResult.key).innerHTML =
-            spinResult?.result;
-    });
+  buttonCancel.cursor = "pointer";
+  buttonCancel.addEventListener("click", function (evt) {
+    toggleConfirm(false);
+  });
 
-    buttonCancelResult.cursor = "pointer";
-    buttonCancelResult.addEventListener("click", function (evt) {
-        playSound("soundFail");
-        goPage("game");
-    });
+  buttonLucky.cursor = "pointer";
+  buttonLucky.addEventListener("click", function (evt) {
+    playSound("soundRandom");
+    randomizeNumber();
+  });
 
-    buttonTwitter.visible = false;
-    buttonFacebook.visible = false;
-    buttonWhatsapp.visible = false;
-    buttonFacebook.cursor = "pointer";
-    buttonFacebook.addEventListener("click", function (evt) {
-        share("facebook");
-    });
-    buttonTwitter.cursor = "pointer";
-    buttonTwitter.addEventListener("click", function (evt) {
-        share("twitter");
-    });
-    buttonWhatsapp.cursor = "pointer";
-    buttonWhatsapp.addEventListener("click", function (evt) {
-        share("whatsapp");
-    });
+  buttonSphereStart.cursor = "pointer";
+  buttonSphereStart.addEventListener("click", function (evt) {
+    startSpin();
+  });
 
-    buttonSoundOff.cursor = "pointer";
-    buttonSoundOff.addEventListener("click", function (evt) {
-        toggleGameMute(true);
-    });
+  buttonLeft.cursor = "pointer";
+  buttonLeft.addEventListener("click", function (evt) {
+    playSound("soundClick");
+    toggleNumberCard(false);
+  });
 
-    buttonSoundOn.cursor = "pointer";
-    buttonSoundOn.addEventListener("click", function (evt) {
-        toggleGameMute(false);
-    });
-
-    buttonFullscreen.cursor = "pointer";
-    buttonFullscreen.addEventListener("click", function (evt) {
-        toggleFullScreen();
-    });
-
-    buttonExit.cursor = "pointer";
-    buttonExit.addEventListener("click", function (evt) {
-        toggleConfirm(true);
-    });
-
-    buttonSettings.cursor = "pointer";
-    buttonSettings.addEventListener("click", function (evt) {
-        toggleOption();
-    });
-
-    buttonConfirm.cursor = "pointer";
-
-    // Check for user gesture before starting the AudioContext
-    document.addEventListener(
-        "click",
-        function () {
-            var audioContext = new (window.AudioContext ||
-                window.webkitAudioContext)();
-            playMusicListBackground(audioContext);
-        },
-        { once: true }
-    );
-    buttonConfirm.addEventListener("click", function (evt) {
-        toggleConfirm(false);
-        stopGame();
-        goPage("main");
-        // reset local storage
-        // clear tat ca giaThuong         // set text html
-
-        giaThuong.forEach((element) => {
-            localStorage.removeItem(element.key);
-            document.getElementById(element.key).innerHTML = "";
-            element.giaithuong = ""; // reset giai thuong
-        });
-    });
-
-    buttonCancel.cursor = "pointer";
-    buttonCancel.addEventListener("click", function (evt) {
-        toggleConfirm(false);
-    });
-
-    buttonLucky.cursor = "pointer";
-    buttonLucky.addEventListener("click", function (evt) {
-        playSound("soundRandom");
-        randomizeNumber();
-    });
-
-    buttonSphereStart.cursor = "pointer";
-    buttonSphereStart.addEventListener("click", function (evt) {
-        startSpin();
-    });
-
-    buttonLeft.cursor = "pointer";
-    buttonLeft.addEventListener("click", function (evt) {
-        playSound("soundClick");
-        toggleNumberCard(false);
-    });
-
-    buttonRight.cursor = "pointer";
-    buttonRight.addEventListener("click", function (evt) {
-        playSound("soundClick");
-        toggleNumberCard(true);
-    });
+  buttonRight.cursor = "pointer";
+  buttonRight.addEventListener("click", function (evt) {
+    playSound("soundClick");
+    toggleNumberCard(true);
+  });
 }
 
 function resetDataFormConfig() {
-    domSpeed.value = revealTimer;
-    domBall.value = totalBall;
+  domSpeed.value = revealTimer;
+  domBall.value = totalBall;
 }
 resetDataFormConfig();
 
 function saveConfig() {
-    revealTimer = domSpeed.value || 6;
-    totalBall = domBall.value || 100;
-    localStorage.setItem("revealTimer", revealTimer);
-    localStorage.setItem("totalBall", totalBall);
-    window.location.reload();
+  revealTimer = domSpeed.value || 6;
+  totalBall = domBall.value || 100;
+  localStorage.setItem("revealTimer", revealTimer);
+  localStorage.setItem("totalBall", totalBall);
+  window.location.reload();
 }
 $("#exampleModal").on("hidden.bs.modal", function () {
-    resetDataFormConfig();
+  resetDataFormConfig();
 });
 
 function appendFocusFrame() {
-    $("#mainHolder").prepend(
-        '<div id="focus" style="position:absolute; width:100%; height:100%; z-index:1000;"></div'
-    );
-    $("#focus").click(function () {
-        $("#focus").remove();
-    });
+  $("#mainHolder").prepend(
+    '<div id="focus" style="position:absolute; width:100%; height:100%; z-index:1000;"></div'
+  );
+  $("#focus").click(function () {
+    $("#focus").remove();
+  });
 }
 
 //random number not in array
 function getRandomUniqueNumber(array) {
-    let randomNumber;
-    do {
-        randomNumber = Math.floor(Math.random() * totalBall); // Thay đổi giới hạn theo nhu cầu của bạn
-    } while (array.includes(randomNumber) || array.length == totalBall);
-    return randomNumber;
+  let randomNumber;
+  do {
+    randomNumber = Math.floor(Math.random() * totalBall); // Thay đổi giới hạn theo nhu cầu của bạn
+  } while (array.includes(randomNumber) || array.length == totalBall);
+  return randomNumber;
 }
 
 /*!
@@ -397,91 +396,92 @@ function getRandomUniqueNumber(array) {
 var curPage = "";
 var boxTableDocument = document.querySelector("#boxTable");
 function removeZindex() {
-    boxTableDocument.classList.remove("zindex-top");
+  boxTableDocument.classList.remove("zindex-top");
 }
 function addZindex() {
-    boxTableDocument.classList.add("zindex-top");
+  boxTableDocument.classList.add("zindex-top");
 }
 function goPage(page) {
-    curPage = page;
+  curPage = page;
 
-    mainContainer.visible = false;
-    gameContainer.visible = false;
-    resultContainer.visible = false;
+  mainContainer.visible = false;
+  gameContainer.visible = false;
+  resultContainer.visible = false;
 
-    var targetContainer = null;
-    // add class zindex-top boxTableDocument
-    boxTableDocument.classList.add("zindex-top");
-    switch (page) {
-        case "main":
-            removeZindex();
-            targetContainer = mainContainer;
-            break;
+  var targetContainer = null;
+  // add class zindex-top boxTableDocument
+  boxTableDocument.classList.add("zindex-top");
+  switch (page) {
+    case "main":
+      removeZindex();
+      targetContainer = mainContainer;
+      break;
 
-        case "game":
-            addZindex()
-            targetContainer = gameContainer;
-            startGame();
-            break;
+    case "game":
+      addZindex();
+      targetContainer = gameContainer;
+      startGame();
+      break;
 
-        case "result":
-            //remove class zindex-top boxTableDocument
-            removeZindex();
-            targetContainer = resultContainer;
-            stopGame();
-            // if (gameData.matchNum != -1) {
-            //     playSound("soundComplete");
-            //     resultTitleTxt.text = resultCompleteText.replace(
-            //         "[NUMBER]",
-            //         addCommas(playerData.score)
-            //     );
-            //     saveGame(playerData.score);
-            // } else {
-            //     playSound("soundFail");
-            //     resultTitleTxt.text = resultFailText;
-            //     saveGame(0);
-            // }
-            playSound("soundComplete");
-            // resultTitleTxt.text = resultSuccessText.replace(
-            //     "[NUMBER]",
-            //     "demo"
-            // );
-            stopMusicBackground();
+    case "result":
+      //remove class zindex-top boxTableDocument
+      removeZindex();
+      targetContainer = resultContainer;
+      stopGame();
+      // if (gameData.matchNum != -1) {
+      //     playSound("soundComplete");
+      //     resultTitleTxt.text = resultCompleteText.replace(
+      //         "[NUMBER]",
+      //         addCommas(playerData.score)
+      //     );
+      //     saveGame(playerData.score);
+      // } else {
+      //     playSound("soundFail");
+      //     resultTitleTxt.text = resultFailText;
+      //     saveGame(0);
+      // }
+      playSound("soundComplete");
+      // resultTitleTxt.text = resultSuccessText.replace(
+      //     "[NUMBER]",
+      //     "demo"
+      // );
+      stopMusicBackground();
 
-            playMusicListBackground();
-            console.log(spinResult);
+      playMusicListBackground();
+      console.log(spinResult);
 
-            if (spinResult?.index != -1) {
-                const itemGiaiThuongResult = giaThuong[spinResult?.index];
-                resultShareTxt.text = shareText
-                    .replace("[RESULT]", spinResult.result)
-                    .replace("[GIAI]", itemGiaiThuongResult.giai);
-            } else {
-                resultShareTxt.text = "Đã quay hoàn thành.";
-            }
+      if (spinResult?.index != -1) {
+        const itemGiaiThuongResult = giaThuong[spinResult?.index];
+        resultShareTxt.text = shareText
+          .replace("[RESULT]", "")
+          .replace("[GIAI]", itemGiaiThuongResult.giai);
+        resultShareTxt1.text = spinResult.result;
+      } else {
+        resultShareTxt.text = "Đã quay hoàn thành.";
+      }
 
-            break;
-    }
+      break;
+  }
 
-    if (targetContainer != null) {
-        targetContainer.visible = true;
-        targetContainer.alpha = 0;
-        TweenMax.to(targetContainer, 0.5, { alpha: 1, overwrite: true });
-    }
+  if (targetContainer != null) {
+    targetContainer.visible = true;
+    targetContainer.alpha = 0;
+    TweenMax.to(targetContainer, 0.5, { alpha: 1, overwrite: true });
+  }
 
-    resizeCanvas();
+  resizeCanvas();
 }
 
 function toggleConfirm(con) {
-    confirmContainer.visible = con;
+  confirmContainer.visible = con;
 
-    if (con) {
-        TweenMax.pauseAll(true, true);
-        gameData.paused = true;
-    } else {
-        TweenMax.resumeAll(true, true);
-        gameData.paused = false;
-    }
+  if (con) {
+    TweenMax.pauseAll(true, true);
+    gameData.paused = true;
+  } else {
+    TweenMax.resumeAll(true, true);
+    gameData.paused = false;
+  }
 }
 
 /*!
@@ -491,95 +491,92 @@ function toggleConfirm(con) {
  */
 
 function startGame() {
-    playerData.score = 0;
+  playerData.score = 0;
 
-    gameData.spin = false;
-    gameData.selectArray = [];
-    gameData.winArray = [];
-    gameData.radius = 0;
-    gameData.matchNum = -1;
-    gameData.numberNum = 0;
-    radiusTweenData.radius = 0;
+  gameData.spin = false;
+  gameData.selectArray = [];
+  gameData.winArray = [];
+  gameData.radius = 0;
+  gameData.matchNum = -1;
+  gameData.numberNum = 0;
+  radiusTweenData.radius = 0;
 
-    resetCard();
-    shuffle(gameData.numberArray);
-    shuffle(gameData.indexArray);
+  resetCard();
+  shuffle(gameData.numberArray);
+  shuffle(gameData.indexArray);
 
-    var thisTotalBall =
-        totalBall > optimizeData.balls ? optimizeData.balls : totalBall;
-    for (var n = 0; n < thisTotalBall; n++) {
-        var targetIndex = gameData.indexArray[n];
-        var targetBall = gameData.ballsArray[targetIndex].obj;
-        targetBall.scaleX = targetBall.scaleY = ballData.scale * 0.9;
+  var thisTotalBall =
+    totalBall > optimizeData.balls ? optimizeData.balls : totalBall;
+  for (var n = 0; n < thisTotalBall; n++) {
+    var targetIndex = gameData.indexArray[n];
+    var targetBall = gameData.ballsArray[targetIndex].obj;
+    targetBall.scaleX = targetBall.scaleY = ballData.scale * 0.9;
 
-        targetBall.x = randomIntFromInterval(
-            gameData.sphereX - 100,
-            gameData.sphereX + 100
-        );
-        targetBall.y = gameData.sphereY;
-        ballsContainer.setChildIndex(targetBall, n);
-    }
-    resetBallsTimer();
-
-    //randomize numbers
-    gameData.ballNumber = [];
-
-    shuffle(gameData.totalBall);
-    for (var n = 0; n < gameData.ballsArray.length; n++) {
-        var currentNumber = Number(gameData.totalBall[n]);
-        gameData.ballNumber.push({
-            index: n,
-            number: currentNumber,
-            status: false,
-        });
-        if (numberStartZero) {
-            currentNumber = pad(currentNumber, 2);
-        } else {
-            currentNumber = pad(currentNumber + 1, 2);
-        }
-
-        for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
-            gameData.ballsArray[n].text[p].text = currentNumber;
-            gameData.ballsArray[n].rotate.cache(-30, -30, 120, 120);
-        }
-    }
-
-    var extraBall = bonusBall == true ? 1 : 0;
-    var totalNum = score_arr.length + extraBall;
-    for (var n = 0; n < totalNum; n++) {
-        $.prize["bg" + n].alpha = 1;
-        $.prize["bgselect" + n].alpha = 1;
-        $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
-    }
-
-    //gameData.revealArray = [12,25,10,3,5,15];
-
-    itemBarUser.visible = false;
-    buttonSphereStart.visible = true;
-    buttonLucky.visible = true;
-    cardContainer.visible = true;
-    tableContainer.visible = false;
-
-    gameData.paused = false;
-    setRevealBalls();
-    //   playSoundLoop(listNhac[0]);
-    //   setSoundVolume(listNhac[0], 0.6);
-
-    selectTitleTxt.text = selectTextDisplay.replace(
-        "[NUMBER]",
-        score_arr.length
+    targetBall.x = randomIntFromInterval(
+      gameData.sphereX - 100,
+      gameData.sphereX + 100
     );
+    targetBall.y = gameData.sphereY;
+    ballsContainer.setChildIndex(targetBall, n);
+  }
+  resetBallsTimer();
 
-    cardData.page = 1;
-    toggleNumberCard(false);
+  //randomize numbers
+  gameData.ballNumber = [];
 
-    displayNumberCard();
+  shuffle(gameData.totalBall);
+  for (var n = 0; n < gameData.ballsArray.length; n++) {
+    var currentNumber = Number(gameData.totalBall[n]);
+    gameData.ballNumber.push({
+      index: n,
+      number: currentNumber,
+      status: false,
+    });
+    if (numberStartZero) {
+      currentNumber = pad(currentNumber, 2);
+    } else {
+      currentNumber = pad(currentNumber + 1, 2);
+    }
 
-    // navigator.getUserMedia(constraints).then((stream) => {
-    //     var audioContext = new AudioContext();
-    //     playMusicList();
-    //     console.log("ads");
-    // });
+    for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
+      gameData.ballsArray[n].text[p].text = currentNumber;
+      gameData.ballsArray[n].rotate.cache(-30, -30, 120, 120);
+    }
+  }
+
+  var extraBall = bonusBall == true ? 1 : 0;
+  var totalNum = score_arr.length + extraBall;
+  for (var n = 0; n < totalNum; n++) {
+    $.prize["bg" + n].alpha = 1;
+    $.prize["bgselect" + n].alpha = 1;
+    $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
+  }
+
+  //gameData.revealArray = [12,25,10,3,5,15];
+
+  itemBarUser.visible = false;
+  buttonSphereStart.visible = true;
+  buttonLucky.visible = true;
+  cardContainer.visible = true;
+  tableContainer.visible = false;
+
+  gameData.paused = false;
+  setRevealBalls();
+  //   playSoundLoop(listNhac[0]);
+  //   setSoundVolume(listNhac[0], 0.6);
+
+  selectTitleTxt.text = selectTextDisplay.replace("[NUMBER]", score_arr.length);
+
+  cardData.page = 1;
+  toggleNumberCard(false);
+
+  displayNumberCard();
+
+  // navigator.getUserMedia(constraints).then((stream) => {
+  //     var audioContext = new AudioContext();
+  //     playMusicList();
+  //     console.log("ads");
+  // });
 }
 
 /*!
@@ -588,68 +585,68 @@ function startGame() {
  *
  */
 function startSpin() {
-    stopSoundLoop("play");
-    if (listResult.length == totalBall) {
+  stopSoundLoop("play");
+  if (listResult.length == totalBall) {
+    return;
+  }
+  gameData.selectArray = [1];
+
+  for (var n = 0; n < totalBall; n++) {
+    var targetNumber = gameData.buttonArray[n].bg;
+    if (targetNumber.isSelected) {
+      gameData.selectArray.push(n);
+    }
+  }
+
+  if (gameData.selectArray.length == score_arr.length) {
+    //memberpayment
+    if (typeof memberData != "undefined") {
+      if (!checkMemberGameType()) {
+        goMemberPage("user");
         return;
+      } else {
+        playerData.chance--;
+        updateUserPoint();
+      }
     }
-    gameData.selectArray = [1];
+    stopMusicBackground();
+    playSound("soso");
 
-    for (var n = 0; n < totalBall; n++) {
-        var targetNumber = gameData.buttonArray[n].bg;
-        if (targetNumber.isSelected) {
-            gameData.selectArray.push(n);
-        }
-    }
+    // itemBarUser.visible = true;
+    buttonSphereStart.visible = false;
+    // buttonLucky.visible = false;
+    // cardContainer.visible = false;
+    // tableContainer.visible = true;
 
-    if (gameData.selectArray.length == score_arr.length) {
-        //memberpayment
-        if (typeof memberData != "undefined") {
-            if (!checkMemberGameType()) {
-                goMemberPage("user");
-                return;
-            } else {
-                playerData.chance--;
-                updateUserPoint();
-            }
-        }
-        stopMusicBackground();
-        playSound("soso");
+    selectTitleTxt.text = prizeTableDisplay;
+    shuffle(gameData.numberArray);
+    setSelectBalls();
+    gameData.spin = true;
+    var randomNum = getRandomUniqueNumber(listResult);
+    gameData.revealArray.push(randomNum);
+    listResult.push(randomNum);
+    let index = getIndexNotSpin();
+    spinResult = {
+      index: index,
+      result: numberStartZero ? randomNum : randomNum + 1,
+    };
 
-        // itemBarUser.visible = true;
-        buttonSphereStart.visible = false;
-        // buttonLucky.visible = false;
-        // cardContainer.visible = false;
-        // tableContainer.visible = true;
-
-        selectTitleTxt.text = prizeTableDisplay;
-        shuffle(gameData.numberArray);
-        setSelectBalls();
-        gameData.spin = true;
-        var randomNum = getRandomUniqueNumber(listResult);
-        gameData.revealArray.push(randomNum);
-        listResult.push(randomNum);
-        let index = getIndexNotSpin();
-        spinResult = {
-            index: index,
-            result: numberStartZero ? randomNum : randomNum + 1,
-        };
-
-        TweenMax.to(radiusTweenData, spinStartSpeed, {
-            radius: spinSpeed,
-            overwrite: true,
-            onComplete: beginWinNumberTimer,
-        });
-        TweenMax.to(soundTweenData, spinStartSpeed, {
-            volume: 1,
-            overwrite: true,
-            onUpdate: updateBallsVolume,
-        });
-    }
+    TweenMax.to(radiusTweenData, spinStartSpeed, {
+      radius: spinSpeed,
+      overwrite: true,
+      onComplete: beginWinNumberTimer,
+    });
+    TweenMax.to(soundTweenData, spinStartSpeed, {
+      volume: 1,
+      overwrite: true,
+      onUpdate: updateBallsVolume,
+    });
+  }
 }
 
 function updateBallsVolume() {
-    setSoundVolume("soundBalls", soundTweenData.volume);
-    setSoundVolume("soundCage", soundTweenData.volume);
+  setSoundVolume("soundBalls", soundTweenData.volume);
+  setSoundVolume("soundCage", soundTweenData.volume);
 }
 
 /*!
@@ -658,20 +655,20 @@ function updateBallsVolume() {
  *
  */
 function stopGame() {
-    stopSoundLoop("soundBalls");
-    stopSoundLoop("soundCage");
+  stopSoundLoop("soundBalls");
+  stopSoundLoop("soundCage");
 
-    gameData.paused = true;
-    gameData.spin = false;
-    gameData.selectArray = [];
-    gameData.winArray = [];
-    gameData.revealArray = [];
-    gameData.radius = 0;
-    radiusTweenData.radius = 0;
-    TweenMax.killAll();
+  gameData.paused = true;
+  gameData.spin = false;
+  gameData.selectArray = [];
+  gameData.winArray = [];
+  gameData.revealArray = [];
+  gameData.radius = 0;
+  radiusTweenData.radius = 0;
+  TweenMax.killAll();
 
-    ballsSelectContainer.removeAllChildren();
-    ballsRevealContainer.removeAllChildren();
+  ballsSelectContainer.removeAllChildren();
+  ballsRevealContainer.removeAllChildren();
 }
 
 /*!
@@ -680,7 +677,7 @@ function stopGame() {
  *
  */
 function saveGame(score) {
-    /*$.ajax({
+  /*$.ajax({
       type: "POST",
       url: 'saveResults.php',
       data: {score:score},
@@ -696,164 +693,164 @@ function saveGame(score) {
  *
  */
 function readyGame() {
-    var startX = 0;
-    var startY = 0;
-    var currentX = startX;
-    var currentY = startY;
-    var spaceX = 1;
-    var spaceY = 55;
-    var columnNum = 0;
+  var startX = 0;
+  var startY = 0;
+  var currentX = startX;
+  var currentY = startY;
+  var spaceX = 1;
+  var spaceY = 55;
+  var columnNum = 0;
 
-    var countNum = 0;
-    for (var n = 0; n < totalBall; n++) {
-        gameData.totalBall.push(n);
+  var countNum = 0;
+  for (var n = 0; n < totalBall; n++) {
+    gameData.totalBall.push(n);
 
-        var newNumberBg = itemNumberBg.clone();
-        var newNumberSelectBg = itemNumberSelectBg.clone();
+    var newNumberBg = itemNumberBg.clone();
+    var newNumberSelectBg = itemNumberSelectBg.clone();
 
-        newNumberBg.x = currentX;
-        newNumberBg.y = currentY;
+    newNumberBg.x = currentX;
+    newNumberBg.y = currentY;
 
-        newNumberSelectBg.x = currentX;
-        newNumberSelectBg.y = currentY;
+    newNumberSelectBg.x = currentX;
+    newNumberSelectBg.y = currentY;
 
-        var newText = new createjs.Text();
-        newText.font = "35px roboto";
-        newText.color = "#000";
-        newText.textAlign = "center";
-        newText.textBaseline = "alphabetic";
-        if (numberStartZero) {
-            newText.text = pad(n, 2);
-        } else {
-            newText.text = pad(n + 1, 2);
-        }
-        newText.x = currentX;
-        newText.y = currentY + 11;
+    var newText = new createjs.Text();
+    newText.font = "35px roboto";
+    newText.color = "#000";
+    newText.textAlign = "center";
+    newText.textBaseline = "alphabetic";
+    if (numberStartZero) {
+      newText.text = pad(n, 2);
+    } else {
+      newText.text = pad(n + 1, 2);
+    }
+    newText.x = currentX;
+    newText.y = currentY + 11;
 
-        newNumberBg.highlight = newNumberSelectBg;
-        newNumberBg.text = newText;
+    newNumberBg.highlight = newNumberSelectBg;
+    newNumberBg.text = newText;
 
-        cardContainer.addChild(newNumberBg, newNumberSelectBg, newText);
-        gameData.buttonArray.push({
-            bg: newNumberBg,
-            select: newNumberSelectBg,
-            text: newText,
-        });
+    cardContainer.addChild(newNumberBg, newNumberSelectBg, newText);
+    gameData.buttonArray.push({
+      bg: newNumberBg,
+      select: newNumberSelectBg,
+      text: newText,
+    });
 
-        newNumberBg.cursor = "pointer";
-        newNumberBg.addEventListener("click", function (evt) {
-            if (!gameData.spin) {
-                playSound("soundNumber");
-                toggleNumber(evt.target);
-            }
-        });
+    newNumberBg.cursor = "pointer";
+    newNumberBg.addEventListener("click", function (evt) {
+      if (!gameData.spin) {
+        playSound("soundNumber");
+        toggleNumber(evt.target);
+      }
+    });
 
-        currentX += spaceX;
+    currentX += spaceX;
 
-        columnNum++;
-        if (columnNum > 5) {
-            columnNum = 0;
-            currentX = startX;
-            currentY += spaceY;
-        }
-
-        countNum++;
-        if (countNum >= cardData.max) {
-            countNum = 0;
-            currentX = startX;
-            currentY = startY;
-        }
-
-        gameData.numberArray.push(n);
+    columnNum++;
+    if (columnNum > 5) {
+      columnNum = 0;
+      currentX = startX;
+      currentY += spaceY;
     }
 
-    var thisTotalBall =
-        totalBall > optimizeData.balls ? optimizeData.balls : totalBall;
-    for (var n = 0; n < thisTotalBall; n++) {
-        gameData.indexArray.push(n);
-        createBall(n);
+    countNum++;
+    if (countNum >= cardData.max) {
+      countNum = 0;
+      currentX = startX;
+      currentY = startY;
     }
 
-    itemBarBonus.visible = false;
-    if (bonusBall) {
-        itemBar.visible = false;
-        itemBarBonus.visible = true;
-    }
+    gameData.numberArray.push(n);
+  }
 
-    cardData.maxPage = totalBall / cardData.max;
-    if (String(cardData.maxPage).indexOf(".") > -1) {
-        cardData.maxPage = Math.floor(cardData.maxPage) + 1;
-    }
+  var thisTotalBall =
+    totalBall > optimizeData.balls ? optimizeData.balls : totalBall;
+  for (var n = 0; n < thisTotalBall; n++) {
+    gameData.indexArray.push(n);
+    createBall(n);
+  }
 
-    createCages();
-    createPhysics();
+  itemBarBonus.visible = false;
+  if (bonusBall) {
+    itemBar.visible = false;
+    itemBarBonus.visible = true;
+  }
+
+  cardData.maxPage = totalBall / cardData.max;
+  if (String(cardData.maxPage).indexOf(".") > -1) {
+    cardData.maxPage = Math.floor(cardData.maxPage) + 1;
+  }
+
+  createCages();
+  createPhysics();
 }
 
 function toggleNumber(obj) {
-    if (!obj.highlight.visible) {
-        if (gameData.selectNum < score_arr.length) {
-            obj.isSelected = true;
+  if (!obj.highlight.visible) {
+    if (gameData.selectNum < score_arr.length) {
+      obj.isSelected = true;
 
-            if (obj.visible) {
-                obj.highlight.visible = true;
-                obj.text.color = "#fff";
-            }
-            gameData.selectNum++;
-        }
-    } else {
-        obj.isSelected = false;
-
-        if (obj.visible) {
-            obj.highlight.visible = false;
-            obj.text.color = "#000";
-        }
-        gameData.selectNum--;
+      if (obj.visible) {
+        obj.highlight.visible = true;
+        obj.text.color = "#fff";
+      }
+      gameData.selectNum++;
     }
+  } else {
+    obj.isSelected = false;
+
+    if (obj.visible) {
+      obj.highlight.visible = false;
+      obj.text.color = "#000";
+    }
+    gameData.selectNum--;
+  }
 }
 
 function toggleNumberCard(con) {
-    if (con) {
-        cardData.page++;
-        cardData.page =
-            cardData.page > cardData.maxPage ? cardData.maxPage : cardData.page;
-    } else {
-        cardData.page--;
-        cardData.page = cardData.page < 1 ? 1 : cardData.page;
-    }
+  if (con) {
+    cardData.page++;
+    cardData.page =
+      cardData.page > cardData.maxPage ? cardData.maxPage : cardData.page;
+  } else {
+    cardData.page--;
+    cardData.page = cardData.page < 1 ? 1 : cardData.page;
+  }
 
-    buttonLeft.visible = false;
-    if (cardData.page > 1) {
-        buttonLeft.visible = true;
-    }
+  buttonLeft.visible = false;
+  if (cardData.page > 1) {
+    buttonLeft.visible = true;
+  }
 
-    buttonRight.visible = false;
-    if (cardData.page != cardData.maxPage && cardData.maxPage > 1) {
-        buttonRight.visible = true;
-    }
+  buttonRight.visible = false;
+  if (cardData.page != cardData.maxPage && cardData.maxPage > 1) {
+    buttonRight.visible = true;
+  }
 
-    displayNumberCard();
+  displayNumberCard();
 }
 
 function displayNumberCard() {
-    var startNum = (cardData.page - 1) * cardData.max;
-    var endNum = startNum + cardData.max;
+  var startNum = (cardData.page - 1) * cardData.max;
+  var endNum = startNum + cardData.max;
 
-    for (var n = 0; n < gameData.buttonArray.length; n++) {
-        gameData.buttonArray[n].text.color = "#000";
-        gameData.buttonArray[n].bg.visible = false;
-        gameData.buttonArray[n].select.visible = false;
-        gameData.buttonArray[n].text.visible = false;
+  for (var n = 0; n < gameData.buttonArray.length; n++) {
+    gameData.buttonArray[n].text.color = "#000";
+    gameData.buttonArray[n].bg.visible = false;
+    gameData.buttonArray[n].select.visible = false;
+    gameData.buttonArray[n].text.visible = false;
 
-        if (n >= startNum && n < endNum) {
-            gameData.buttonArray[n].bg.visible = true;
-            gameData.buttonArray[n].text.visible = true;
+    if (n >= startNum && n < endNum) {
+      gameData.buttonArray[n].bg.visible = true;
+      gameData.buttonArray[n].text.visible = true;
 
-            if (gameData.buttonArray[n].bg.isSelected) {
-                gameData.buttonArray[n].select.visible = true;
-                gameData.buttonArray[n].text.color = "#fff";
-            }
-        }
+      if (gameData.buttonArray[n].bg.isSelected) {
+        gameData.buttonArray[n].select.visible = true;
+        gameData.buttonArray[n].text.color = "#fff";
+      }
     }
+  }
 }
 
 /*!
@@ -862,14 +859,14 @@ function displayNumberCard() {
  *
  */
 function resetCard() {
-    gameData.selectNum = 0;
+  gameData.selectNum = 0;
 
-    for (var n = 0; n < totalBall; n++) {
-        var targetNumber = gameData.buttonArray[n].bg;
-        targetNumber.isSelected = false;
-        targetNumber.highlight.visible = false;
-        targetNumber.text.color = "#000";
-    }
+  for (var n = 0; n < totalBall; n++) {
+    var targetNumber = gameData.buttonArray[n].bg;
+    targetNumber.isSelected = false;
+    targetNumber.highlight.visible = false;
+    targetNumber.text.color = "#000";
+  }
 }
 
 /*!
@@ -878,11 +875,11 @@ function resetCard() {
  *
  */
 function randomizeNumber() {
-    resetCard();
-    shuffle(gameData.numberArray);
-    for (var n = 0; n < score_arr.length; n++) {
-        toggleNumber(gameData.buttonArray[gameData.numberArray[n]].bg);
-    }
+  resetCard();
+  shuffle(gameData.numberArray);
+  for (var n = 0; n < score_arr.length; n++) {
+    toggleNumber(gameData.buttonArray[gameData.numberArray[n]].bg);
+  }
 }
 
 /*!
@@ -892,17 +889,17 @@ function randomizeNumber() {
  */
 
 function updateGame() {
-    spinCage();
-    updatePhysics();
+  spinCage();
+  updatePhysics();
 
-    if (spinDirection) {
-        gameData.radius -= radiusTweenData.radius;
-        gameData.radius = gameData.radius < -360 ? 0 : gameData.radius;
-    } else {
-        gameData.radius += radiusTweenData.radius;
-        gameData.radius = gameData.radius > 360 ? 0 : gameData.radius;
-    }
-    itemStick.rotation = itemShine.rotation = gameData.radius;
+  if (spinDirection) {
+    gameData.radius -= radiusTweenData.radius;
+    gameData.radius = gameData.radius < -360 ? 0 : gameData.radius;
+  } else {
+    gameData.radius += radiusTweenData.radius;
+    gameData.radius = gameData.radius > 360 ? 0 : gameData.radius;
+  }
+  itemStick.rotation = itemShine.rotation = gameData.radius;
 }
 
 /*!
@@ -911,144 +908,144 @@ function updateGame() {
  *
  */
 function createBall(number) {
-    var newBallContainer = new createjs.Container();
-    var newBall = itemBallBg.clone();
-    newBall.x = 0;
-    newBall.y = 0;
-    newBall.regX = 30;
-    newBall.regY = 30;
+  var newBallContainer = new createjs.Container();
+  var newBall = itemBallBg.clone();
+  newBall.x = 0;
+  newBall.y = 0;
+  newBall.regX = 30;
+  newBall.regY = 30;
 
-    var newBallShadow = itemBallShadow.clone();
-    newBallShadow.x = 0;
-    newBallShadow.y = 0;
+  var newBallShadow = itemBallShadow.clone();
+  newBallShadow.x = 0;
+  newBallShadow.y = 0;
 
-    var ballNumber;
-    if (numberStartZero) {
-        ballNumber = pad(number, 2);
-    } else {
-        ballNumber = pad(number + 1, 2);
-    }
+  var ballNumber;
+  if (numberStartZero) {
+    ballNumber = pad(number, 2);
+  } else {
+    ballNumber = pad(number + 1, 2);
+  }
 
-    var space = 53;
-    var newText = new createjs.Text();
-    newText.font = "25px roboto";
-    newText.color = "#000";
-    newText.textAlign = "center";
-    newText.textBaseline = "alphabetic";
-    newText.text = ballNumber;
-    newText.x = 0;
-    newText.y = 10;
+  var space = 53;
+  var newText = new createjs.Text();
+  newText.font = "25px roboto";
+  newText.color = "#000";
+  newText.textAlign = "center";
+  newText.textBaseline = "alphabetic";
+  newText.text = ballNumber;
+  newText.x = 0;
+  newText.y = 10;
 
-    var newText2 = new createjs.Text();
-    newText2.font = "25px roboto";
-    newText2.color = "#000";
-    newText2.textAlign = "center";
-    newText2.textBaseline = "alphabetic";
-    newText2.text = ballNumber;
-    newText2.x = space;
-    newText2.y = 10;
+  var newText2 = new createjs.Text();
+  newText2.font = "25px roboto";
+  newText2.color = "#000";
+  newText2.textAlign = "center";
+  newText2.textBaseline = "alphabetic";
+  newText2.text = ballNumber;
+  newText2.x = space;
+  newText2.y = 10;
 
-    var newText3 = new createjs.Text();
-    newText3.font = "25px roboto";
-    newText3.color = "#000";
-    newText3.textAlign = "center";
-    newText3.textBaseline = "alphabetic";
-    newText3.text = ballNumber;
-    newText3.x = 0;
-    newText3.y = space + 10;
+  var newText3 = new createjs.Text();
+  newText3.font = "25px roboto";
+  newText3.color = "#000";
+  newText3.textAlign = "center";
+  newText3.textBaseline = "alphabetic";
+  newText3.text = ballNumber;
+  newText3.x = 0;
+  newText3.y = space + 10;
 
-    var newText4 = new createjs.Text();
-    newText4.font = "25px roboto";
-    newText4.color = "#000";
-    newText4.textAlign = "center";
-    newText4.textBaseline = "alphabetic";
-    newText4.text = ballNumber;
-    newText4.x = space;
-    newText4.y = space + 10;
+  var newText4 = new createjs.Text();
+  newText4.font = "25px roboto";
+  newText4.color = "#000";
+  newText4.textAlign = "center";
+  newText4.textBaseline = "alphabetic";
+  newText4.text = ballNumber;
+  newText4.x = space;
+  newText4.y = space + 10;
 
-    var newBallInsideContainer = new createjs.Container();
-    newBallInsideContainer.addChild(
-        newBall,
-        newText,
-        newText2,
-        newText3,
-        newText4
-    );
+  var newBallInsideContainer = new createjs.Container();
+  newBallInsideContainer.addChild(
+    newBall,
+    newText,
+    newText2,
+    newText3,
+    newText4
+  );
 
-    var ballMask = new createjs.Shape();
-    ballMask.graphics.beginFill("red").drawCircle(0, 0, 30);
-    newBallInsideContainer.cache(-30, -30, 120, 120);
-    newBallInsideContainer.mask = ballMask;
+  var ballMask = new createjs.Shape();
+  ballMask.graphics.beginFill("red").drawCircle(0, 0, 30);
+  newBallInsideContainer.cache(-30, -30, 120, 120);
+  newBallInsideContainer.mask = ballMask;
 
-    ballData.scale = ballRadius / ballData.radius;
-    newBallContainer.x = randomIntFromInterval(
-        gameData.sphereX - 150,
-        gameData.sphereX + 150
-    );
-    newBallContainer.y = gameData.sphereY;
-    newBallContainer.addChild(newBallShadow, newBallInsideContainer);
-    newBallContainer.scaleX = newBallContainer.scaleY = ballData.scale;
+  ballData.scale = ballRadius / ballData.radius;
+  newBallContainer.x = randomIntFromInterval(
+    gameData.sphereX - 150,
+    gameData.sphereX + 150
+  );
+  newBallContainer.y = gameData.sphereY;
+  newBallContainer.addChild(newBallShadow, newBallInsideContainer);
+  newBallContainer.scaleX = newBallContainer.scaleY = ballData.scale;
 
-    ballsContainer.addChild(newBallContainer);
-    gameData.ballsArray.push({
-        obj: newBallContainer,
-        rotate: newBallInsideContainer,
-        text: [newText, newText2, newText3, newText4],
-    });
+  ballsContainer.addChild(newBallContainer);
+  gameData.ballsArray.push({
+    obj: newBallContainer,
+    rotate: newBallInsideContainer,
+    text: [newText, newText2, newText3, newText4],
+  });
 }
 
 function updateBallRotate(num, velX, velY, angle) {
-    if (!rotateBall) {
-        return;
-    }
+  if (!rotateBall) {
+    return;
+  }
 
-    var targetBall = gameData.ballsArray[num].obj;
-    var targetRotateBall = gameData.ballsArray[num].rotate;
+  var targetBall = gameData.ballsArray[num].obj;
+  var targetRotateBall = gameData.ballsArray[num].rotate;
 
-    targetRotateBall.x += velX;
-    targetRotateBall.y += velY;
+  targetRotateBall.x += velX;
+  targetRotateBall.y += velY;
 
-    var end = -53;
-    targetRotateBall.x = targetRotateBall.x > 0 ? end : targetRotateBall.x;
-    targetRotateBall.x = targetRotateBall.x < end ? 0 : targetRotateBall.x;
+  var end = -53;
+  targetRotateBall.x = targetRotateBall.x > 0 ? end : targetRotateBall.x;
+  targetRotateBall.x = targetRotateBall.x < end ? 0 : targetRotateBall.x;
 
-    targetRotateBall.y = targetRotateBall.y > 0 ? end : targetRotateBall.y;
-    targetRotateBall.y = targetRotateBall.y < end ? 0 : targetRotateBall.y;
+  targetRotateBall.y = targetRotateBall.y > 0 ? end : targetRotateBall.y;
+  targetRotateBall.y = targetRotateBall.y < end ? 0 : targetRotateBall.y;
 }
 
 function createCages() {
-    var totalNum = 35;
-    var wheelRadius = 360 / totalNum;
+  var totalNum = 35;
+  var wheelRadius = 360 / totalNum;
 
-    for (var n = 0; n < totalNum; n++) {
-        var currentRadius = wheelRadius * n;
-        var newPos = getAnglePositionByValue(
-            gameData.sphereX,
-            gameData.sphereY,
-            gameData.cageRadius,
-            currentRadius
-        );
-        var newHit = itemBallHit.clone();
-        newHit.x = newPos.x;
-        newHit.y = newPos.y;
-        newHit.radius = currentRadius;
+  for (var n = 0; n < totalNum; n++) {
+    var currentRadius = wheelRadius * n;
+    var newPos = getAnglePositionByValue(
+      gameData.sphereX,
+      gameData.sphereY,
+      gameData.cageRadius,
+      currentRadius
+    );
+    var newHit = itemBallHit.clone();
+    newHit.x = newPos.x;
+    newHit.y = newPos.y;
+    newHit.radius = currentRadius;
 
-        gameData.cageArray.push(newHit);
-    }
+    gameData.cageArray.push(newHit);
+  }
 }
 
 function spinCage() {
-    for (var n = 0; n < gameData.cageArray.length; n++) {
-        var targetHit = gameData.cageArray[n];
-        var newPos = getAnglePositionByValue(
-            gameData.sphereX,
-            gameData.sphereY,
-            gameData.cageRadius,
-            targetHit.radius + gameData.radius
-        );
-        targetHit.x = newPos.x;
-        targetHit.y = newPos.y;
-    }
+  for (var n = 0; n < gameData.cageArray.length; n++) {
+    var targetHit = gameData.cageArray[n];
+    var newPos = getAnglePositionByValue(
+      gameData.sphereX,
+      gameData.sphereY,
+      gameData.cageRadius,
+      targetHit.radius + gameData.radius
+    );
+    targetHit.x = newPos.x;
+    targetHit.y = newPos.y;
+  }
 }
 
 /*!
@@ -1058,88 +1055,88 @@ function spinCage() {
  */
 
 function beginWinNumberTimer() {
-    TweenMax.to(ballsContainer, revealTimer, {
-        overwrite: true,
-        onComplete: revealWinNumber,
-    });
+  TweenMax.to(ballsContainer, revealTimer, {
+    overwrite: true,
+    onComplete: revealWinNumber,
+  });
 }
 
 function revealWinNumber() {
-    var tweenNum = gameData.revealArray[gameData.numberNum];
-    var revealNum = gameData.revealArray[gameData.numberNum];
+  var tweenNum = gameData.revealArray[gameData.numberNum];
+  var revealNum = gameData.revealArray[gameData.numberNum];
 
-    var findBallClone = false;
+  var findBallClone = false;
+  for (var p = 0; p < gameData.ballNumber.length; p++) {
+    if (tweenNum == gameData.ballNumber[p].number) {
+      findBallClone = true;
+      tweenNum = gameData.ballNumber[p].index;
+      p = gameData.ballNumber.length;
+    }
+  }
+
+  if (!findBallClone) {
     for (var p = 0; p < gameData.ballNumber.length; p++) {
-        if (tweenNum == gameData.ballNumber[p].number) {
-            findBallClone = true;
-            tweenNum = gameData.ballNumber[p].index;
-            p = gameData.ballNumber.length;
-        }
+      if (!gameData.ballNumber[p].status) {
+        gameData.ballNumber[p].status = true;
+        tweenNum = gameData.ballNumber[p].index;
+        p = gameData.ballNumber.length;
+      }
     }
+  }
 
-    if (!findBallClone) {
-        for (var p = 0; p < gameData.ballNumber.length; p++) {
-            if (!gameData.ballNumber[p].status) {
-                gameData.ballNumber[p].status = true;
-                tweenNum = gameData.ballNumber[p].index;
-                p = gameData.ballNumber.length;
-            }
-        }
-    }
+  gameData.revealIndex = tweenNum;
+  gameData.winArray.push(tweenNum);
 
-    gameData.revealIndex = tweenNum;
-    gameData.winArray.push(tweenNum);
+  var targetBall = gameData.ballsArray[tweenNum].obj;
+  var targetBallRotate = gameData.ballsArray[tweenNum].rotate;
+  var currentNumber = gameData.revealArray[gameData.numberNum];
+  if (numberStartZero) {
+    currentNumber = pad(currentNumber, 2);
+  } else {
+    currentNumber = pad(currentNumber + 1, 2);
+  }
+  for (var p = 0; p < gameData.ballsArray[tweenNum].text.length; p++) {
+    gameData.ballsArray[tweenNum].text[p].text = currentNumber;
+    gameData.ballsArray[tweenNum].rotate.cache(-30, -30, 120, 120);
+  }
+  gameData.numberNum++;
 
-    var targetBall = gameData.ballsArray[tweenNum].obj;
-    var targetBallRotate = gameData.ballsArray[tweenNum].rotate;
-    var currentNumber = gameData.revealArray[gameData.numberNum];
-    if (numberStartZero) {
-        currentNumber = pad(currentNumber, 2);
-    } else {
-        currentNumber = pad(currentNumber + 1, 2);
-    }
-    for (var p = 0; p < gameData.ballsArray[tweenNum].text.length; p++) {
-        gameData.ballsArray[tweenNum].text[p].text = currentNumber;
-        gameData.ballsArray[tweenNum].rotate.cache(-30, -30, 120, 120);
-    }
-    gameData.numberNum++;
+  playSound("soundSuck");
+  TweenMax.to(targetBallRotate, 0.5, {
+    x: 0,
+    y: 0,
+    rotation: 0,
+    overwrite: true,
+  });
+  TweenMax.to(targetBall, 0.5, {
+    x: gameData.sphereX,
+    y: (canvasH / 100) * 71,
+    rotation: 0,
+    scaleX: 1,
+    scaleY: 1,
+    overwrite: true,
+    onComplete: function () {
+      playSound("soundReveal");
+      setRevealBalls();
+      matchWinBalls(revealNum);
 
-    playSound("soundSuck");
-    TweenMax.to(targetBallRotate, 0.5, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        overwrite: true,
-    });
-    TweenMax.to(targetBall, 0.5, {
+      TweenMax.to(targetBall, 0.2, {
+        delay: 1,
         x: gameData.sphereX,
-        y: (canvasH / 100) * 71,
+        y: (canvasH / 100) * 80,
         rotation: 0,
-        scaleX: 1,
-        scaleY: 1,
         overwrite: true,
-        onComplete: function () {
-            playSound("soundReveal");
-            setRevealBalls();
-            matchWinBalls(revealNum);
+      });
+    },
+  });
 
-            TweenMax.to(targetBall, 0.2, {
-                delay: 1,
-                x: gameData.sphereX,
-                y: (canvasH / 100) * 80,
-                rotation: 0,
-                overwrite: true,
-            });
-        },
-    });
-
-    var extraBall = bonusBall == true ? 1 : 0;
-    endGame();
-    //   if (gameData.numberNum < score_arr.length + extraBall) {
-    //     beginWinNumberTimer();
-    //   } else {
-    //     endGame();
-    //   }
+  var extraBall = bonusBall == true ? 1 : 0;
+  endGame();
+  //   if (gameData.numberNum < score_arr.length + extraBall) {
+  //     beginWinNumberTimer();
+  //   } else {
+  //     endGame();
+  //   }
 }
 
 /*!
@@ -1148,64 +1145,62 @@ function revealWinNumber() {
  *
  */
 function setRevealBalls() {
-    ballsRevealContainer.removeAllChildren();
+  ballsRevealContainer.removeAllChildren();
 
-    var extraBall = bonusBall == true ? 1 : 0;
-    var totalBalls = score_arr.length + extraBall;
-    var totalSplit = Math.floor(totalBalls / 2);
-    var spaceX = 1;
-    var startX = itemBar.x - spaceX * totalSplit;
+  var extraBall = bonusBall == true ? 1 : 0;
+  var totalBalls = score_arr.length + extraBall;
+  var totalSplit = Math.floor(totalBalls / 2);
+  var spaceX = 1;
+  var startX = itemBar.x - spaceX * totalSplit;
 
-    if (isEven(totalBalls)) {
-        startX += spaceX / 2;
-    }
-    if (bonusBall) {
-        startX -= spaceX / 5;
-    }
-    var startY = itemBar.y - 3;
+  if (isEven(totalBalls)) {
+    startX += spaceX / 2;
+  }
+  if (bonusBall) {
+    startX -= spaceX / 5;
+  }
+  var startY = itemBar.y - 3;
 
-    for (var n = 0; n < score_arr.length; n++) {
-        if (n < gameData.winArray.length) {
-            var currentBallRotate =
-                gameData.ballsArray[gameData.winArray[n]].rotate;
-            currentBallRotate.x = currentBallRotate.y = 0;
-            var newGuessBall =
-                gameData.ballsArray[gameData.winArray[n]].obj.clone(true);
-            newGuessBall.x = startX;
-            newGuessBall.y = startY;
-        } else {
-            var newGuessBall = itemBallGuess.clone();
-            newGuessBall.x = startX;
-            newGuessBall.y = startY;
-        }
-
-        ballsRevealContainer.addChild(newGuessBall);
-        startX += spaceX;
+  for (var n = 0; n < score_arr.length; n++) {
+    if (n < gameData.winArray.length) {
+      var currentBallRotate = gameData.ballsArray[gameData.winArray[n]].rotate;
+      currentBallRotate.x = currentBallRotate.y = 0;
+      var newGuessBall =
+        gameData.ballsArray[gameData.winArray[n]].obj.clone(true);
+      newGuessBall.x = startX;
+      newGuessBall.y = startY;
+    } else {
+      var newGuessBall = itemBallGuess.clone();
+      newGuessBall.x = startX;
+      newGuessBall.y = startY;
     }
 
-    if (bonusBall) {
-        startX += spaceX / 3;
+    ballsRevealContainer.addChild(newGuessBall);
+    startX += spaceX;
+  }
 
-        if (gameData.winArray.length > score_arr.length) {
-            var currentBallRotate =
-                gameData.ballsArray[
-                    gameData.winArray[gameData.winArray.length - 1]
-                ].rotate;
-            currentBallRotate.x = currentBallRotate.y = 0;
-            var newGuessBall =
-                gameData.ballsArray[
-                    gameData.winArray[gameData.winArray.length - 1]
-                ].obj.clone(true);
-            newGuessBall.x = startX;
-            newGuessBall.y = startY;
-        } else {
-            var newGuessBall = itemBallBonus.clone();
-            newGuessBall.x = startX;
-            newGuessBall.y = startY;
-        }
+  if (bonusBall) {
+    startX += spaceX / 3;
 
-        ballsRevealContainer.addChild(newGuessBall);
+    if (gameData.winArray.length > score_arr.length) {
+      var currentBallRotate =
+        gameData.ballsArray[gameData.winArray[gameData.winArray.length - 1]]
+          .rotate;
+      currentBallRotate.x = currentBallRotate.y = 0;
+      var newGuessBall =
+        gameData.ballsArray[
+          gameData.winArray[gameData.winArray.length - 1]
+        ].obj.clone(true);
+      newGuessBall.x = startX;
+      newGuessBall.y = startY;
+    } else {
+      var newGuessBall = itemBallBonus.clone();
+      newGuessBall.x = startX;
+      newGuessBall.y = startY;
     }
+
+    ballsRevealContainer.addChild(newGuessBall);
+  }
 }
 
 /*!
@@ -1214,57 +1209,57 @@ function setRevealBalls() {
  *
  */
 function setSelectBalls() {
-    ballsSelectContainer.removeAllChildren();
-    gameData.dimArray = [];
+  ballsSelectContainer.removeAllChildren();
+  gameData.dimArray = [];
 
-    var totalSplit = Math.floor(score_arr.length / 2);
-    var spaceX = 65;
-    var startX = itemBarUser.x - spaceX * totalSplit;
-    if (isEven(score_arr.length)) {
-        startX += spaceX / 2;
+  var totalSplit = Math.floor(score_arr.length / 2);
+  var spaceX = 65;
+  var startX = itemBarUser.x - spaceX * totalSplit;
+  if (isEven(score_arr.length)) {
+    startX += spaceX / 2;
+  }
+  var startY = itemBarUser.y - 3;
+
+  var storeNumber = gameData.ballsArray[0].text[0].text;
+
+  for (var n = 0; n < gameData.selectArray.length; n++) {
+    var currentBallRotate = gameData.ballsArray[0].rotate;
+    currentBallRotate.x = currentBallRotate.y = 0;
+
+    //set current number
+    var currentNumber = gameData.selectArray[n];
+    if (numberStartZero) {
+      currentNumber = pad(currentNumber, 2);
+    } else {
+      currentNumber = pad(currentNumber + 1, 2);
     }
-    var startY = itemBarUser.y - 3;
-
-    var storeNumber = gameData.ballsArray[0].text[0].text;
-
-    for (var n = 0; n < gameData.selectArray.length; n++) {
-        var currentBallRotate = gameData.ballsArray[0].rotate;
-        currentBallRotate.x = currentBallRotate.y = 0;
-
-        //set current number
-        var currentNumber = gameData.selectArray[n];
-        if (numberStartZero) {
-            currentNumber = pad(currentNumber, 2);
-        } else {
-            currentNumber = pad(currentNumber + 1, 2);
-        }
-        for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
-            gameData.ballsArray[0].text[p].text = currentNumber;
-            gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
-        }
-
-        var newGuessBall = gameData.ballsArray[0].obj.clone(true);
-        newGuessBall.scaleX = newGuessBall.scaleY = 1;
-        newGuessBall.x = startX;
-        newGuessBall.y = startY;
-        newGuessBall.rotation = 0;
-
-        var newDimBall = itemBallDim.clone();
-        newDimBall.x = startX;
-        newDimBall.y = startY;
-        newDimBall.active = true;
-        newDimBall.selectNumber = gameData.selectArray[n];
-        gameData.dimArray.push(newDimBall);
-
-        startX += spaceX;
-        ballsSelectContainer.addChild(newGuessBall, newDimBall);
-    }
-
-    //set back number
     for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
-        gameData.ballsArray[0].text[p].text = storeNumber;
-        gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
+      gameData.ballsArray[0].text[p].text = currentNumber;
+      gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
     }
+
+    var newGuessBall = gameData.ballsArray[0].obj.clone(true);
+    newGuessBall.scaleX = newGuessBall.scaleY = 1;
+    newGuessBall.x = startX;
+    newGuessBall.y = startY;
+    newGuessBall.rotation = 0;
+
+    var newDimBall = itemBallDim.clone();
+    newDimBall.x = startX;
+    newDimBall.y = startY;
+    newDimBall.active = true;
+    newDimBall.selectNumber = gameData.selectArray[n];
+    gameData.dimArray.push(newDimBall);
+
+    startX += spaceX;
+    ballsSelectContainer.addChild(newGuessBall, newDimBall);
+  }
+
+  //set back number
+  for (var p = 0; p < gameData.ballsArray[n].text.length; p++) {
+    gameData.ballsArray[0].text[p].text = storeNumber;
+    gameData.ballsArray[0].rotate.cache(-30, -30, 120, 120);
+  }
 }
 
 /*!
@@ -1273,58 +1268,58 @@ function setSelectBalls() {
  *
  */
 function matchWinBalls(number) {
-    var oldMatch = gameData.matchNum;
+  var oldMatch = gameData.matchNum;
 
-    for (var n = 0; n < gameData.selectArray.length; n++) {
-        //if(gameData.winArray.indexOf(gameData.selectArray[n]) != -1){
-        if (gameData.dimArray[n].selectNumber == number) {
-            if (gameData.dimArray[n].active) {
-                gameData.matchNum++;
-                gameData.dimArray[n].active = false;
-                animateHighlight(gameData.dimArray[n]);
-            }
+  for (var n = 0; n < gameData.selectArray.length; n++) {
+    //if(gameData.winArray.indexOf(gameData.selectArray[n]) != -1){
+    if (gameData.dimArray[n].selectNumber == number) {
+      if (gameData.dimArray[n].active) {
+        gameData.matchNum++;
+        gameData.dimArray[n].active = false;
+        animateHighlight(gameData.dimArray[n]);
+      }
+    }
+  }
+
+  if (oldMatch == gameData.matchNum) {
+    return;
+  }
+
+  var extraBall = bonusBall == true ? 1 : 0;
+  var totalMatchNum = score_arr.length + extraBall;
+  totalMatchNum--;
+
+  for (var n = 0; n < score_arr.length; n++) {
+    if (gameData.matchNum == n) {
+      var targetNum = totalMatchNum - n;
+      if (bonusBall && gameData.matchNum == score_arr.length - 1) {
+        if (gameData.winArray.length > score_arr.length) {
+          //bonus
+        } else {
+          targetNum = 0;
         }
+      }
+      TweenMax.to($.prize["bg" + targetNum], 1, {
+        overwrite: true,
+        onComplete: animatePrize,
+        onCompleteParams: [targetNum],
+      });
     }
-
-    if (oldMatch == gameData.matchNum) {
-        return;
-    }
-
-    var extraBall = bonusBall == true ? 1 : 0;
-    var totalMatchNum = score_arr.length + extraBall;
-    totalMatchNum--;
-
-    for (var n = 0; n < score_arr.length; n++) {
-        if (gameData.matchNum == n) {
-            var targetNum = totalMatchNum - n;
-            if (bonusBall && gameData.matchNum == score_arr.length - 1) {
-                if (gameData.winArray.length > score_arr.length) {
-                    //bonus
-                } else {
-                    targetNum = 0;
-                }
-            }
-            TweenMax.to($.prize["bg" + targetNum], 1, {
-                overwrite: true,
-                onComplete: animatePrize,
-                onCompleteParams: [targetNum],
-            });
-        }
-    }
+  }
 }
 
 function animatePrize(num) {
-    var extraBall = bonusBall == true ? 1 : 0;
-    for (var n = 0; n < score_arr.length + extraBall; n++) {
-        $.prize["bg" + n].alpha = 1;
-        $.prize["bgselect" + n].alpha = 1;
-        $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
-    }
+  var extraBall = bonusBall == true ? 1 : 0;
+  for (var n = 0; n < score_arr.length + extraBall; n++) {
+    $.prize["bg" + n].alpha = 1;
+    $.prize["bgselect" + n].alpha = 1;
+    $.prize["text" + n].color = $.prize["score" + n].color = "#8d6d2c";
+  }
 
-    playSound("soundWin");
-    animateHighlight($.prize["bg" + num]);
-    $.prize["text" + num].color = $.prize["score" + num].color = "#fff";
-    playerData.score = $.prize["score" + num].score;
+  playSound("soundWin");
+  animateHighlight($.prize["bg" + num]);
+  $.prize["text" + num].color = $.prize["score" + num].color = "#fff";
+  playerData.score = $.prize["score" + num].score;
 }
 
 /*!
@@ -1333,35 +1328,35 @@ function animatePrize(num) {
  *
  */
 function animateHighlight(obj) {
-    TweenMax.to(obj, 0.1, {
-        alpha: 0.2,
+  TweenMax.to(obj, 0.1, {
+    alpha: 0.2,
+    overwrite: true,
+    onComplete: function () {
+      TweenMax.to(obj, 0.1, {
+        alpha: 1,
         overwrite: true,
         onComplete: function () {
-            TweenMax.to(obj, 0.1, {
+          TweenMax.to(obj, 0.1, {
+            alpha: 0.2,
+            overwrite: true,
+            onComplete: function () {
+              TweenMax.to(obj, 0.1, {
                 alpha: 1,
                 overwrite: true,
                 onComplete: function () {
-                    TweenMax.to(obj, 0.1, {
-                        alpha: 0.2,
-                        overwrite: true,
-                        onComplete: function () {
-                            TweenMax.to(obj, 0.1, {
-                                alpha: 1,
-                                overwrite: true,
-                                onComplete: function () {
-                                    TweenMax.to(obj, 0.1, {
-                                        alpha: 0,
-                                        overwrite: true,
-                                        onComplete: function () {},
-                                    });
-                                },
-                            });
-                        },
-                    });
+                  TweenMax.to(obj, 0.1, {
+                    alpha: 0,
+                    overwrite: true,
+                    onComplete: function () {},
+                  });
                 },
-            });
+              });
+            },
+          });
         },
-    });
+      });
+    },
+  });
 }
 
 /*!
@@ -1370,34 +1365,34 @@ function animateHighlight(obj) {
  *
  */
 function endGame() {
-    TweenMax.to(radiusTweenData, spinEndSpeed, { radius: 0, overwrite: true });
-    //   buttonSphereStart.visible = true;
+  TweenMax.to(radiusTweenData, spinEndSpeed, { radius: 0, overwrite: true });
+  //   buttonSphereStart.visible = true;
 
-    TweenMax.to(soundTweenData, spinEndSpeed, {
-        volume: 0.1,
-        overwrite: true,
-        onUpdate: updateBallsVolume,
-    });
-    // set 5s delay to show result
-    //   TweenMax.to(ballsContainer, 20, {
-    //     overwrite: true,
-    //     onComplete: function () {
-    //       //memberpayment
-    //       goPage("game");
-    //     },
-    //   });
+  TweenMax.to(soundTweenData, spinEndSpeed, {
+    volume: 0.1,
+    overwrite: true,
+    onUpdate: updateBallsVolume,
+  });
+  // set 5s delay to show result
+  //   TweenMax.to(ballsContainer, 20, {
+  //     overwrite: true,
+  //     onComplete: function () {
+  //       //memberpayment
+  //       goPage("game");
+  //     },
+  //   });
 
-    TweenMax.to(ballsContainer, 4, {
-        overwrite: true,
-        onComplete: function () {
-            //memberpayment
-            if (typeof memberData != "undefined") {
-                updateUserPoint();
-            }
+  TweenMax.to(ballsContainer, 4, {
+    overwrite: true,
+    onComplete: function () {
+      //memberpayment
+      if (typeof memberData != "undefined") {
+        updateUserPoint();
+      }
 
-            goPage("result");
-        },
-    });
+      goPage("result");
+    },
+  });
 }
 
 /*!
@@ -1406,110 +1401,106 @@ function endGame() {
  *
  */
 function createPercentage() {
-    gameData.percentageArray = [];
+  gameData.percentageArray = [];
 
-    var extraBall = bonusBall == true ? 1 : 0;
-    var totalNum = score_arr.length + extraBall;
-    var totalBall = 0;
-    var percent = 0;
-    var isBonusBall = false;
+  var extraBall = bonusBall == true ? 1 : 0;
+  var totalNum = score_arr.length + extraBall;
+  var totalBall = 0;
+  var percent = 0;
+  var isBonusBall = false;
 
-    for (var n = 0; n < score_arr.length + extraBall; n++) {
-        isBonusBall = false;
+  for (var n = 0; n < score_arr.length + extraBall; n++) {
+    isBonusBall = false;
 
-        if (bonusBall) {
-            if (n == 0) {
-                totalNum--;
-                totalBall = totalNum;
-                percent = score_arr[totalNum - 1].percent;
-            } else if (n == 1) {
-                totalBall = totalNum;
-                percent = bonusScore[0].percent;
-                totalNum++;
-                isBonusBall = true;
-            } else {
-                totalBall = totalNum;
-                percent = score_arr[totalNum - 1].percent;
-            }
-        } else {
-            totalBall = totalNum;
-            percent = score_arr[totalNum - 1].percent;
-        }
-
+    if (bonusBall) {
+      if (n == 0) {
         totalNum--;
-        if (!isNaN(percent)) {
-            if (percent > 0) {
-                for (var p = 0; p < percent; p++) {
-                    gameData.percentageArray.push({
-                        total: totalNum,
-                        bonus: isBonusBall,
-                    });
-                }
-            }
-        }
+        totalBall = totalNum;
+        percent = score_arr[totalNum - 1].percent;
+      } else if (n == 1) {
+        totalBall = totalNum;
+        percent = bonusScore[0].percent;
+        totalNum++;
+        isBonusBall = true;
+      } else {
+        totalBall = totalNum;
+        percent = score_arr[totalNum - 1].percent;
+      }
+    } else {
+      totalBall = totalNum;
+      percent = score_arr[totalNum - 1].percent;
     }
 
-    for (var n = gameData.percentageArray.length; n < 100; n++) {
-        gameData.percentageArray.push({ total: 0, bonus: false });
+    totalNum--;
+    if (!isNaN(percent)) {
+      if (percent > 0) {
+        for (var p = 0; p < percent; p++) {
+          gameData.percentageArray.push({
+            total: totalNum,
+            bonus: isBonusBall,
+          });
+        }
+      }
     }
+  }
+
+  for (var n = gameData.percentageArray.length; n < 100; n++) {
+    gameData.percentageArray.push({ total: 0, bonus: false });
+  }
 }
 
 function getResultOnPercent() {
-    shuffle(gameData.percentageArray);
+  shuffle(gameData.percentageArray);
 
-    var selectArray = [];
-    var leftArray = [];
+  var selectArray = [];
+  var leftArray = [];
 
-    for (var n = 0; n < gameData.selectArray.length; n++) {
-        selectArray.push(gameData.selectArray[n]);
+  for (var n = 0; n < gameData.selectArray.length; n++) {
+    selectArray.push(gameData.selectArray[n]);
+  }
+
+  shuffle(selectArray);
+
+  var extraBall = bonusBall == true ? 1 : 0;
+  var numberIndex = 0;
+  for (var b = 0; b < score_arr.length; b++) {
+    if (selectArray.indexOf(gameData.numberArray[numberIndex]) == -1) {
+      gameData.revealArray.push(gameData.numberArray[numberIndex]);
+    } else {
+      b--;
     }
+    numberIndex++;
+  }
 
-    shuffle(selectArray);
+  var bonusNum = 0;
+  if (gameData.percentageArray[0].total > 0) {
+    for (var n = 0; n < gameData.percentageArray[0].total; n++) {
+      gameData.revealArray[n] = selectArray[n];
 
-    var extraBall = bonusBall == true ? 1 : 0;
-    var numberIndex = 0;
-    for (var b = 0; b < score_arr.length; b++) {
+      if (
+        gameData.percentageArray[0].bonus &&
+        n == gameData.percentageArray[0].total - 1
+      ) {
+        bonusNum = selectArray[n + 1];
+      }
+    }
+    shuffle(gameData.revealArray);
+  }
+
+  if (extraBall) {
+    if (gameData.percentageArray[0].bonus) {
+      gameData.revealArray.push(bonusNum);
+    } else {
+      for (var b = 0; b < 1; b++) {
         if (selectArray.indexOf(gameData.numberArray[numberIndex]) == -1) {
-            gameData.revealArray.push(gameData.numberArray[numberIndex]);
+          gameData.revealArray.push(gameData.numberArray[numberIndex]);
         } else {
-            b--;
+          b--;
         }
         numberIndex++;
+      }
     }
-
-    var bonusNum = 0;
-    if (gameData.percentageArray[0].total > 0) {
-        for (var n = 0; n < gameData.percentageArray[0].total; n++) {
-            gameData.revealArray[n] = selectArray[n];
-
-            if (
-                gameData.percentageArray[0].bonus &&
-                n == gameData.percentageArray[0].total - 1
-            ) {
-                bonusNum = selectArray[n + 1];
-            }
-        }
-        shuffle(gameData.revealArray);
-    }
-
-    if (extraBall) {
-        if (gameData.percentageArray[0].bonus) {
-            gameData.revealArray.push(bonusNum);
-        } else {
-            for (var b = 0; b < 1; b++) {
-                if (
-                    selectArray.indexOf(gameData.numberArray[numberIndex]) == -1
-                ) {
-                    gameData.revealArray.push(
-                        gameData.numberArray[numberIndex]
-                    );
-                } else {
-                    b--;
-                }
-                numberIndex++;
-            }
-        }
-    }
+  }
 }
 
 /*!
@@ -1519,13 +1510,13 @@ function getResultOnPercent() {
  */
 
 function toggleOption() {
-    if (optionsContainer.visible) {
-        addZindex();
-        optionsContainer.visible = false;
-    } else {
-        removeZindex();
-        optionsContainer.visible = true;
-    }
+  if (optionsContainer.visible) {
+    addZindex();
+    optionsContainer.visible = false;
+  } else {
+    removeZindex();
+    optionsContainer.visible = true;
+  }
 }
 
 /*!
